@@ -8,6 +8,6 @@ import android.widget.Toast
  * Email : zofnk@vip.qq.com.
  * Creat Time :  2019-11-6. 11:47
  */
-fun String.toast(ctx: Context, msg: String?) {
-    Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show()
+fun String.toast(ctx: Context, time: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(ctx, this, time).show()
 }

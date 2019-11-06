@@ -1,0 +1,9 @@
+ext {
+    appcompat = '1.0.0'
+    recyclerview = '1.0.0'
+
+    android = [
+            appcompat   : "androidx.appcompat:appcompat:${appcompat}",
+            recyclerview: "androidx.recyclerview:recyclerview:${recyclerview}"
+    ]
+}
