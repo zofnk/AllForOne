@@ -15,4 +15,3 @@
 .idea/
 app/build
 .gradle/
-*.properties
