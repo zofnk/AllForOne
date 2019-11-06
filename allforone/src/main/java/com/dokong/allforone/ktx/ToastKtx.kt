@@ -1,4 +1,4 @@
-package com.allforone.ktx
+package com.dokong.allforone.ktx
 
 import android.content.Context
 import android.widget.Toast
