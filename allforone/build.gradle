@@ -59,6 +59,7 @@ dependencies {
     //涵盖不了全部方法,需要暴露
     //docs : https://www.hutool.cn/docs/
     api config.utils.hutool
+    implementation config.utils.log
 
     //BRVAH
     implementation config.recyclerview.brvah

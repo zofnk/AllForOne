@@ -42,7 +42,8 @@ ext {
     ]
 
     utils = [
-            hutool: "cn.hutool:hutool-all:$hutool"
+            hutool: "cn.hutool:hutool-all:$hutool",
+            log : "com.github.zhaokaiqiang.klog:library:1.6.0",
     ]
 
     net = [
