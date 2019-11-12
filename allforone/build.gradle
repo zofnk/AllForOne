@@ -7,16 +7,15 @@ group = 'com.github.zofnk'
 group='com.gitee.zofnk'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
-
-    def config = rootProject.ext
+    def config = rootProject.ext.android
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 1
-        versionName "0.0.1"
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
 
         consumerProguardFiles 'consumer-rules.pro'
     }
