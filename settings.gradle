@@ -1,2 +1,2 @@
-include ':app', ':allforone'
+include ':app', ':allforone', ':allforone-java'
 rootProject.name='AllForOne'
