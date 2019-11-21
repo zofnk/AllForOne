@@ -5,6 +5,8 @@ package com.allforone.http.listener
  * Email : zofnk@vip.qq.com.
  * Creat Time :  11.21. 21:45
  */
-interface ResponseImpl {
+interface ResponseImpl<T> {
     fun isSuccess(): Boolean
+
+    fun getResult(): T
 }

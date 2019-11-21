@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders
  * Email : zofnk@vip.qq.com.
  * Creat Time :  2019-11-11. 13:21
  */
-fun <T : ViewModel> AppCompatActivity.getViewModel(clazz: Class<T>) =
+fun <T : ViewModel> AppCompatActivity.createVM(clazz: Class<T>) =
     ViewModelProviders.of(this).get(clazz)
 
 val AppCompatActivity.activity

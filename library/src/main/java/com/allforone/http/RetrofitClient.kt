@@ -19,13 +19,11 @@ object RetrofitClient {
     private const val timeOutValue = 10L
     val globalHeaders = arrayListOf<Pair<String, String>>()
 
-    //TODO()
-    val retrofit by lazy {
+    val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .client(okHttpManager.build())
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .baseUrl("")
             .build()
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
  * Created by zbf on 2019/11/19.
  */
 
-public class newss extends NetResponse {
+public class newss {
 
     /**
      * reason : 成功的返回
@@ -32,11 +32,6 @@ public class newss extends NetResponse {
 
     public void setResult(ResultBean result) {
         this.result = result;
-    }
-
-    @Override
-    public boolean isSuccess() {
-        return false;
     }
 
     public static class ResultBean {

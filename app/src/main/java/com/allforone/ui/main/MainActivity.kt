@@ -1,14 +1,16 @@
-package com.allforone
+package com.allforone.ui.main
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.allforone.R
 import com.allforone.bean.newss
 import com.allforone.http.NetSubscribe
 import com.allforone.http.listener.OnSuccessAndFaultListener
 import com.allforone.http.listener.OnSuccessAndFaultSub
 import com.allforone.ktx.activity
 import com.allforone.ktx.logE
+import com.allforone.ktx.createVM
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -18,14 +20,17 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var mainVM: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        mainVM = createVM(MainViewModel::class.java)
         initViews()
     }
 
     private fun initViews() {
+
 
         tv_get.setOnClickListener {
             NetSubscribe.getNews(
