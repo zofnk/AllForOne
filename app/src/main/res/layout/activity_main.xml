@@ -22,4 +22,9 @@
         android:text="post请求"
         android:textSize="22sp" />
 
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@{vm.content}" />
 </LinearLayout>

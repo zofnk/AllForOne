@@ -13,7 +13,7 @@ import retrofit2.Retrofit
  * Email : zofnk@vip.qq.com.
  * Creat Time :  11.21. 20:38
  */
-val Net: Retrofit get() = RetrofitClient.retrofit
+val Net: Retrofit.Builder get() = RetrofitClient.retrofitBuilder
 
 fun Retrofit.Builder.url(url: String) {
     baseUrl(url)

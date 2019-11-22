@@ -8,10 +8,10 @@ import com.allforone.data.NetResponse
  * Creat Time :  11.21. 23:16
  */
 data class ApiBaseResp<T>(
-    val message: String,
-    val code: Int,
-    val data: T
+    val Message: String,
+    val Code: Int,
+    val Data: T
 ) : NetResponse<T>() {
-    override fun getResult() = data
-    override fun isSuccess() = code == 0
+    override fun getResult() = Data
+    override fun isSuccess() = Code == 0
 }

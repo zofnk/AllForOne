@@ -3,6 +3,7 @@ package com.allforone.ui.main
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.allforone.R
 import com.allforone.bean.newss
 import com.allforone.http.NetSubscribe
@@ -31,24 +32,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
 
+        mainVM.content.observe(activity, Observer { tv_content.text = it })
 
         tv_get.setOnClickListener {
-            NetSubscribe.getNews(
-                activity,
-                "top",
-                "9f552a8aca577737335c7106f1236a97",
-                OnSuccessAndFaultSub(object : OnSuccessAndFaultListener<newss> {
-
-                    override fun onSuccess(result: newss) {
-                        tv_get.text = result.result.data[0].title
-                    }
-
-                    override fun onFault(errorMsg: String) {
-                        Log.e("zbf", "错误信息:$errorMsg")
-                        "错误信息:$errorMsg".logE()
-                    }
-                })
-            )
+            mainVM.loadData()
         }
 
         tv_post.setOnClickListener {

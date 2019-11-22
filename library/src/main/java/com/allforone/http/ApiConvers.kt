@@ -9,11 +9,11 @@ import java.lang.NullPointerException
  * Email : zofnk@vip.qq.com.
  * Creat Time :  11.21. 23:42
  */
-class PalLoad<T> : Function<NetResponse<T>, T> {
+class ApiConvers<T> : Function<NetResponse<T>, T> {
 
     override fun apply(t: NetResponse<T>): T {
         if (!t.isSuccess()) {
-            throw NullPointerException()
+            throw ApiException(t.toJson())
         }
         return t.getResult()
     }

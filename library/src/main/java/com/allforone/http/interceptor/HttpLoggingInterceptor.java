@@ -1,7 +1,7 @@
 package com.allforone.http.interceptor;
 
 import com.allforone.ktx.LogKtxKt;
-import com.allforone.ktx.StreamKtxKt;
+import com.allforone.utils.IOUtil;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -147,7 +147,7 @@ public class HttpLoggingInterceptor implements Interceptor {
                     if (responseBody == null) return response;
 
                     if (isPlaintext(responseBody.contentType())) {
-                        byte[] bytes = StreamKtxKt.toByteArray(responseBody.byteStream());
+                        byte[] bytes = IOUtil.toByteArray(responseBody.byteStream());
 
                         MediaType contentType = responseBody.contentType();
                         String body = new String(bytes, getCharset(contentType));
