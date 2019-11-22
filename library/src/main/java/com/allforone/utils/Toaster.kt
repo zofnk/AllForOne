@@ -11,7 +11,7 @@ import android.widget.Toast
 class Toaster {
     companion object {
         fun toast(ctx: Context, str: CharSequence, time: Int = Toast.LENGTH_SHORT) {
-            Toast.makeText(ctx, str, time).show()
+            Toast.makeText(ctx.applicationContext, str, time).show()
         }
     }
 }
