@@ -15,8 +15,10 @@ import io.reactivex.observers.DisposableObserver
  */
 class MainRepository : BaseRepository() {
 
-    private val api: MainApi by lazy { createApi(clazz = MainApi::class.java) }
+    //main界面api接口 , 这里可以和mvp模式拓展一下
+    private val api: MainApi by lazy { createApi(MainApi::class.java) }
 
+    //获取请求来的数据
     fun getBannerList(
         type: Int,
         area: Int,
@@ -26,4 +28,8 @@ class MainRepository : BaseRepository() {
             .convers
             .subscribe(obs)
     }
+
+    //获取数据库数据 eg:
+//    fun getData2Database() = "..."
+
 }

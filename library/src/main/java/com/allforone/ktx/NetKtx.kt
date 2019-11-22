@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.allforone.data.NetResponse
 import com.allforone.http.RetrofitClient
 import com.allforone.utils.NetworkUtils
+import com.google.gson.Gson
 import retrofit2.Retrofit
 
 /**
@@ -18,6 +19,8 @@ val Net: Retrofit.Builder get() = RetrofitClient.retrofitBuilder
 fun Retrofit.Builder.url(url: String) {
     baseUrl(url)
 }
+
+fun <T> NetResponse<T>.toJson(): String = Gson().toJson(this)
 
 val Context.netAvailable
     get() = NetworkUtils.isNetWorkAvailable(this)

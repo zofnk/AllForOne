@@ -1,6 +1,7 @@
 package com.allforone.http
 
 import com.allforone.data.NetResponse
+import com.allforone.ktx.toJson
 import io.reactivex.functions.Function
 import java.lang.NullPointerException
 
