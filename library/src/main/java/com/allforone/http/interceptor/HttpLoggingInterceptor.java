@@ -122,7 +122,7 @@ public class HttpLoggingInterceptor implements Interceptor {
                 }
             }
         } catch (Exception e) {
-            LogKtxKt.printStackTrace(e);
+            LogKtxKt.printTrace(e);
         } finally {
             log("--> END " + request.method());
         }
@@ -160,7 +160,7 @@ public class HttpLoggingInterceptor implements Interceptor {
                 }
             }
         } catch (Exception e) {
-            LogKtxKt.printStackTrace(e);
+            LogKtxKt.printTrace(e);
         } finally {
             log("<-- END HTTP");
         }
@@ -201,7 +201,7 @@ public class HttpLoggingInterceptor implements Interceptor {
             Charset charset = getCharset(body.contentType());
             log("\tbody:" + buffer.readString(charset));
         } catch (Exception e) {
-            LogKtxKt.printStackTrace(e);
+            LogKtxKt.printTrace(e);
         }
     }
 }

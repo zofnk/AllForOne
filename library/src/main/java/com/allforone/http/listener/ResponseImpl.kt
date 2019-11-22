@@ -8,5 +8,5 @@ package com.allforone.http.listener
 interface ResponseImpl<T> {
     fun isSuccess(): Boolean
 
-    fun getResult(): T
+    fun response(): T
 }

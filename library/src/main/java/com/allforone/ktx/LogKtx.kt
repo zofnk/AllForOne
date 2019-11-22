@@ -52,7 +52,7 @@ fun String.logE(tag: String = CommonConfig.defaultTagLog) {
     logE(tag, this)
 }
 
-fun Throwable?.printStackTrace() {
+fun Throwable?.printTrace() {
     if (CommonConfig.debug) this?.printStackTrace()
 }
 

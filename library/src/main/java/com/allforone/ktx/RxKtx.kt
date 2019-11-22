@@ -2,7 +2,7 @@ package com.allforone.ktx
 
 import com.allforone.data.NetResponse
 import com.allforone.http.ApiConvers
-import com.allforone.http.NetExceptionObservable
+import com.allforone.http.function.NetExceptionObservable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

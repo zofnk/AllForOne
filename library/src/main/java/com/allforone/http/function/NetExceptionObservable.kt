@@ -1,4 +1,4 @@
-package com.allforone.http
+package com.allforone.http.function
 
 import io.reactivex.Observable
 import io.reactivex.functions.Function

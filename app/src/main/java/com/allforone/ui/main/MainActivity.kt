@@ -40,20 +40,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         tv_post.setOnClickListener {
-            NetSubscribe.postNews(
-                activity,
-                "top",
-                "9f552a8aca577737335c7106f1236a97",
-                OnSuccessAndFaultSub(object : OnSuccessAndFaultListener<newss> {
-                    override fun onSuccess(result: newss) {
-                        tv_post.text = result.result.data[0].title
-                    }
 
-                    override fun onFault(errorMsg: String) {
-                        "错误信息:$errorMsg".logE()
-                    }
-                })
-            )
+            mainVM.api2()
+
+
+//            NetSubscribe.getNews(
+//                activity,
+//                "top",
+//                "9f552a8aca577737335c7106f1236a97",
+//                OnSuccessAndFaultSub(object : OnSuccessAndFaultListener<newss> {
+//                    override fun onSuccess(result: newss) {
+//                        tv_content.text = result.result.data[0].title
+//                    }
+//
+//                    override fun onFault(errorMsg: String) {
+//                        tv_content.text = "错误信息:$errorMsg"
+//                    }
+//                })
+//            )
         }
     }
 }

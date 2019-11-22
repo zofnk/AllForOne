@@ -4,7 +4,10 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.allforone.bean.BannerBean
 import com.allforone.bean.ListResponse
+import com.allforone.bean.News
+import com.allforone.bean.egbean.TopResult
 import com.allforone.core.vm.BaseViewModel
+import com.allforone.http.function.NetObservable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
@@ -23,20 +26,28 @@ class MainViewModel(app: Application) : BaseViewModel(app) {
         mainRepo.getBannerList(
             type = 1,
             area = 9,
-            obs = object : Observer<ListResponse<BannerBean>> {
-                override fun onSubscribe(d: Disposable) {
-                }
+            obs = object : NetObservable<ListResponse<BannerBean>>() {
 
-                override fun onComplete() {
-                }
-
-                override fun onNext(t: ListResponse<BannerBean>) {
+                override fun onSuccess(t: ListResponse<BannerBean>) {
                     content.value = t.List[0].Content
+
+
                 }
 
-                override fun onError(e: Throwable) {
-
+                override fun onError(msg: String) {
                 }
             })
+    }
+
+    fun api2() {
+        mainRepo.getNews(obs = object : NetObservable<List<News>>() {
+
+            override fun onSuccess(t: List<News>) {
+                content.value = t[0].title
+            }
+
+            override fun onError(msg: String) {
+            }
+        })
     }
 }

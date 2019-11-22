@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import com.allforone.utils.DpUtil
 import com.allforone.utils.Toaster
 import com.allforone.utils.WindowsUtil
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 /**
  * Author : zofnk.
@@ -107,3 +109,9 @@ fun View.windowsWidth(): Int = WindowsUtil.windowsWidth(ctx)
 
 fun View.windowsHeight(): Int = WindowsUtil.windowsHeight(ctx)
 
+/**
+ *
+ */
+fun Any.toJson(): String = Gson().toJson(this)
+
+inline fun <reified T> String.toBean(): T = Gson().fromJson<T>(this, object : TypeToken<T>() {}.type)

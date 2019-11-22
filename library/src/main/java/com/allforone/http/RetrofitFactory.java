@@ -51,7 +51,7 @@ public class RetrofitFactory {
                     .client(okHttpBuilder.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .baseUrl("")
+                    .baseUrl("https://v.juhe.cn/")
                     .build();
     }
 

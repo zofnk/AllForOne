@@ -52,7 +52,7 @@ public class IOUtil {
         try {
             closeable.close();
         } catch (Exception e) {
-            LogKtxKt.printStackTrace(e);
+            LogKtxKt.printTrace(e);
         }
     }
 
@@ -61,7 +61,7 @@ public class IOUtil {
         try {
             flushable.flush();
         } catch (Exception e) {
-            LogKtxKt.printStackTrace(e);
+            LogKtxKt.printTrace(e);
         }
     }
 
@@ -128,7 +128,7 @@ public class IOUtil {
             oos.flush();
             return baos.toByteArray();
         } catch (IOException e) {
-            LogKtxKt.printStackTrace(e);
+            LogKtxKt.printTrace(e);
         } finally {
             closeQuietly(oos);
             closeQuietly(baos);
@@ -145,7 +145,7 @@ public class IOUtil {
             ois = new ObjectInputStream(bais);
             return ois.readObject();
         } catch (Exception e) {
-            LogKtxKt.printStackTrace(e);
+            LogKtxKt.printTrace(e);
         } finally {
            closeQuietly(ois);
            closeQuietly(bais);
@@ -362,7 +362,7 @@ public class IOUtil {
         try {
             stat = new StatFs(path);
         } catch (Exception e) {
-            LogKtxKt.printStackTrace(e);
+            LogKtxKt.printTrace(e);
             return 0;
         }
         if (Build.VERSION.SDK_INT >= 18)
@@ -382,7 +382,7 @@ public class IOUtil {
             long availableBlocks = (Long) getAvailableBlocksMethod.invoke(statFs);
             return blockSize * availableBlocks;
         } catch (Throwable e) {
-            LogKtxKt.printStackTrace(e);
+            LogKtxKt.printTrace(e);
         }
         return 0;
     }

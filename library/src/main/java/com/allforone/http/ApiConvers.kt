@@ -3,7 +3,6 @@ package com.allforone.http
 import com.allforone.data.NetResponse
 import com.allforone.ktx.toJson
 import io.reactivex.functions.Function
-import java.lang.NullPointerException
 
 /**
  * Author : zofnk.
@@ -16,6 +15,6 @@ class ApiConvers<T> : Function<NetResponse<T>, T> {
         if (!t.isSuccess()) {
             throw ApiException(t.toJson())
         }
-        return t.getResult()
+        return t.response()
     }
 }

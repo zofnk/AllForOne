@@ -1,9 +1,7 @@
 package com.allforone.ui.main
 
-import com.allforone.bean.ApiBaseResp
-import com.allforone.bean.BannerBean
-import com.allforone.bean.ListResponse
-import com.allforone.bean.newss
+import com.allforone.bean.*
+import com.allforone.bean.egbean.TopBean
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -20,7 +18,7 @@ interface MainApi {
     fun postNews(@Query("type") version: String, @Query("key") key: String): Observable<newss>
 
     @GET("toutiao/index")
-    fun getNews(@Query("type") version: String, @Query("key") key: String): Observable<newss>
+    fun getNews(@Query("type") version: String, @Query("key") key: String): Observable<TopBean<List<News>>>
 
     @GET("/animes?AdList")
     fun banner(

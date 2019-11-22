@@ -12,6 +12,6 @@ data class ApiBaseResp<T>(
     val Code: Int,
     val Data: T
 ) : NetResponse<T>() {
-    override fun getResult() = Data
+    override fun response() = Data
     override fun isSuccess() = Code == 0
 }
