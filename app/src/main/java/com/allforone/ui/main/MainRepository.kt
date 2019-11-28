@@ -3,13 +3,10 @@ package com.allforone.ui.main
 import com.allforone.bean.BannerBean
 import com.allforone.bean.ListResponse
 import com.allforone.bean.News
-import com.allforone.bean.egbean.TopBean
-import com.allforone.bean.egbean.TopResult
 import com.allforone.core.repo.BaseRepository
 import com.allforone.http.createApi
-import com.allforone.ktx.convers
+import com.allforone.ktx.converts
 import io.reactivex.Observer
-import io.reactivex.observers.DisposableObserver
 
 /**
  * Author : zofnk.
@@ -30,7 +27,7 @@ class MainRepository : BaseRepository() {
         obs: Observer<ListResponse<BannerBean>>
     ) {
         api.banner(type = type, area = area)
-            .convers
+            .converts
             .subscribe(obs)
     }
 
@@ -40,7 +37,7 @@ class MainRepository : BaseRepository() {
         obs: Observer<List<News>>
     ) {
         api2.getNews(type, key)
-            .convers
+            .converts
             .map { it.data }
             .subscribe(obs)
     }

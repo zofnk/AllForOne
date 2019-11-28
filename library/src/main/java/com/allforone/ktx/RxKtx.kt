@@ -1,7 +1,7 @@
 package com.allforone.ktx
 
 import com.allforone.data.NetResponse
-import com.allforone.http.ApiConvers
+import com.allforone.http.ApiConverts
 import com.allforone.http.function.NetExceptionObservable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,7 +17,7 @@ val <T> Observable<T>.schedule: Observable<T>
     get() = subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
 //项目实体类转换
-val <T, R : NetResponse<T>> Observable<R>.convers: Observable<T>
+val <T, R : NetResponse<T>> Observable<R>.converts: Observable<T>
     get() = schedule
-        .map(ApiConvers())
+        .map(ApiConverts())
         .onErrorResumeNext(NetExceptionObservable())

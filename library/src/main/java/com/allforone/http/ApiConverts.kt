@@ -9,7 +9,7 @@ import io.reactivex.functions.Function
  * Email : zofnk@vip.qq.com.
  * Creat Time :  11.21. 23:42
  */
-class ApiConvers<T> : Function<NetResponse<T>, T> {
+class ApiConverts<T> : Function<NetResponse<T>, T> {
 
     override fun apply(t: NetResponse<T>): T {
         if (!t.isSuccess()) {

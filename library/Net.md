@@ -40,7 +40,7 @@
 
 * 做这个步骤主要是为了能成功时把data抽离出来,失败直接抛入异常,并把整个`bean`转成jsonString到异常信息去处理
 
-* 处理的步骤就是通过`RxJava`的`map`操作符,具体实现:`ApiConvers.kt`
+* 处理的步骤就是通过`RxJava`的`map`操作符,具体实现:`ApiConverts.kt`
 
 #### RetrofitBuilder
 
@@ -48,5 +48,5 @@
 header/拦截器/cache/证书/等等配置项操作,目前只配置了`BaseUrl`
 
 #### 异常处理
-目前还没写到,按以前的思路来说是通过`ApiConvers.kt`分发下来的`onError(t : Throw)`,来实现一个`BaseObservable.kt`
+目前还没写到,按以前的思路来说是通过`ApiConverts.kt`分发下来的`onError(t : Throw)`,来实现一个`BaseObservable.kt`
 来获取异常信息,再判断与`ApiException`来进行具体业务逻辑,此处需要一个更好的思路
