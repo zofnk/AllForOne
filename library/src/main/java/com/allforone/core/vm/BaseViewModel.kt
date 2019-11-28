@@ -10,5 +10,4 @@ import androidx.lifecycle.AndroidViewModel
  */
 abstract class BaseViewModel(app: Application) : AndroidViewModel(app) {
 
-    abstract fun loadData()
 }

@@ -9,6 +9,7 @@ import com.allforone.http.NetSubscribe
 import com.allforone.http.listener.OnSuccessAndFaultListener
 import com.allforone.http.listener.OnSuccessAndFaultSub
 import com.allforone.ktx.activity
+import com.allforone.ktx.click
 import com.allforone.ktx.createVM
 import com.allforone.ktx.logE
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,15 +32,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
 
+        rvMain.adapter = mainVM.mainAdapter
+
         //展示vm处理好的数据
         mainVM.content.observe(activity, Observer { tv_content.text = it })
 
         //点击加载数据
-        tv_get.setOnClickListener {
-            mainVM.loadData()
-        }
+        tv_get.click { mainVM.loadData() }
 
-        tv_post.setOnClickListener {
+        tv_post.click {
 
             mainVM.api2()
 

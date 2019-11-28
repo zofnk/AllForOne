@@ -2,6 +2,8 @@ package com.allforone.ui.main
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import com.allforone.MultiAdapter
+import com.allforone.MultiBean
 import com.allforone.bean.BannerBean
 import com.allforone.bean.ListResponse
 import com.allforone.bean.News
@@ -20,8 +22,30 @@ class MainViewModel(app: Application) : BaseViewModel(app) {
 
     val content = MutableLiveData<String>()
     private val mainRepo: MainRepository by lazy { MainRepository() }
+    val mainAdapter by lazy { MultiAdapter() }
 
-    override fun loadData() {
+    init {
+        val data = listOf(
+            MultiBean(1, "TEXT"),
+            MultiBean(
+                2,
+                "https://user-gold-cdn.xitu.io/2019/11/8/16e4926b45ab6d18?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"
+            ),
+            MultiBean(1, "TEXT"),
+            MultiBean(
+                2,
+                "https://user-gold-cdn.xitu.io/2019/11/8/16e4926b45ab6d18?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"
+            ),
+            MultiBean(1, "TEXT"),
+            MultiBean(
+                2,
+                "https://user-gold-cdn.xitu.io/2019/11/8/16e4926b45ab6d18?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"
+            )
+        )
+        mainAdapter.setNewData(data)
+    }
+
+    fun loadData() {
         //根据接口获取数据并反馈给v层(activity/fragment/xml)
         mainRepo.getBannerList(
             type = 1,

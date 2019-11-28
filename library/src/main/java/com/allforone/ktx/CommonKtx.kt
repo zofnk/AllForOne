@@ -1,10 +1,7 @@
 package com.allforone.ktx
 
 import android.content.Context
-import android.graphics.Point
-import android.view.Display
 import android.view.View
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -115,3 +112,4 @@ fun View.windowsHeight(): Int = WindowsUtil.windowsHeight(ctx)
 fun Any.toJson(): String = Gson().toJson(this)
 
 inline fun <reified T> String.toBean(): T = Gson().fromJson<T>(this, object : TypeToken<T>() {}.type)
+
