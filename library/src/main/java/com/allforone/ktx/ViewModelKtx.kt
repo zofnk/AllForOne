@@ -1,5 +1,7 @@
 package com.allforone.ktx
 
+import android.app.Application
+import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import com.allforone.data.NetResponse
 
@@ -8,6 +10,8 @@ import com.allforone.data.NetResponse
  * Email : zofnk@vip.qq.com.
  * Creat Time :  2019-11-22. 16:23
  */
+val AndroidViewModel.ctx: Context get() = getApplication<Application>().applicationContext
+
 class data<T> {
     val message: String = ""
     val code: Int = 0

@@ -1,7 +1,6 @@
 package com.allforone.ktx
 
 import android.content.Context
-import android.opengl.Visibility
 import android.view.View
 
 /**
@@ -36,9 +35,10 @@ fun View.toggleVisible() {
 
 //点击
 fun View.click(click: (v: View) -> Unit) {
-    setOnClickListener { click(it) }
+    //之后需要修改为防抖点击
+    setOnClickListener { click(this) }
 }
 
-fun View.longClick(click: (v: View) -> Boolean) {
-    setOnLongClickListener { click(it) }
+fun View.longClick(longClick: (v: View) -> Boolean) {
+    setOnLongClickListener { longClick(this) }
 }

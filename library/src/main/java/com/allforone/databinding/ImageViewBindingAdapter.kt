@@ -15,8 +15,8 @@ class ImageViewBindingAdapter {
 
         @JvmStatic
         @BindingAdapter(value = [IMAGE_URL, IMAGE_PLACEHOLDER, IMAGE_ERROR], requireAll = false)
-        fun loadUrl(v: ImageView, url: Any?, placeholder: Int = 0, error: Int = 0) {
-            v.load(url = url, placeholder = placeholder, error = error)
+        fun ImageView.loadUrl(url: Any?, placeholder: Int = 0, error: Int = 0) {
+            load(url = url, placeholder = placeholder, error = error)
         }
     }
 }
