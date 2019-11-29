@@ -34,11 +34,14 @@ fun View.toggleVisible() {
 }
 
 //点击
-fun View.click(click: (v: View) -> Unit) {
+fun View.click(action: (v: View) -> Unit) {
     //之后需要修改为防抖点击
-    setOnClickListener { click(this) }
+    setOnClickListener { action(it) }
 }
 
-fun View.longClick(longClick: (v: View) -> Boolean) {
-    setOnLongClickListener { longClick(this) }
+fun View.longClick(action: (v: View) -> Unit) {
+    setOnLongClickListener {
+        action(it)
+        return@setOnLongClickListener true
+    }
 }

@@ -1,9 +1,6 @@
 package com.allforone
 
 import com.allforone.core.adapter.QuickBindingMultiAdapter
-import com.allforone.databinding.ItemBindingImageBinding
-import com.allforone.databinding.ItemBindingTextBinding
-import com.allforone.ktx.viewBinding
 import com.chad.library.adapter.base.BaseViewHolder
 import com.chad.library.adapter.base.entity.MultiItemEntity
 
@@ -29,17 +26,5 @@ class MultiAdapter : QuickBindingMultiAdapter<MultiBean, BaseViewHolder>() {
     }
 
     override fun convert(helper: BaseViewHolder, item: MultiBean) {
-        when (helper.itemViewType) {
-            MultiBean.TYPE_TEXT -> helper.viewBinding<ItemBindingTextBinding>(layoutResId)
-                .apply {
-                    this.item = item
-                    executePendingBindings()
-                }
-
-            MultiBean.TYPE_IMAGE -> helper.viewBinding<ItemBindingImageBinding>(layoutResId).apply {
-                this.item = item
-                executePendingBindings()
-            }
-        }
     }
 }

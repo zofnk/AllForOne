@@ -21,9 +21,8 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
     val viewContent = ObservableField<String>()
     private val mainRepo by lazy { NetRepository() }
 
-    fun longClick(): Boolean {
+    fun longClick() {
         toast("长按")
-        return true
     }
 
     fun click() {

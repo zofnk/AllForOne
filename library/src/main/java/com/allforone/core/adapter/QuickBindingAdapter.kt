@@ -13,8 +13,8 @@ import com.dokong.allforone.R
  * Email : zofnk@vip.qq.com.
  * Creat Time :  2019-11-28. 09:04
  */
-abstract class QuickBindingAdapter<T, B : ViewDataBinding> :
-    BaseQuickAdapter<T, BaseBindingViewHolder<B>>(null) {
+abstract class QuickBindingAdapter<T, B : ViewDataBinding>(layoutResId: Int) :
+    BaseQuickAdapter<T, BaseBindingViewHolder<B>>(layoutResId) {
 
     abstract override fun convert(hepler: BaseBindingViewHolder<B>, item: T)
 

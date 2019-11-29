@@ -1,7 +1,8 @@
-package com.allforone.databinding
+package com.allforone.binding.recyclerview
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.allforone.binding.RECYCLER_BIND_ITEMS
 import com.chad.library.adapter.base.BaseQuickAdapter
 
 /**
@@ -9,7 +10,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
  * Email : zofnk@vip.qq.com.
  * Creat Time :  2019-11-29. 10:55
  */
-class RecyclerViewBindingAdapter {
+class RecyclerViewAdapter {
     companion object {
 
         @JvmStatic

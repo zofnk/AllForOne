@@ -29,5 +29,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.api.NetActivity" />
+        <activity android:name=".ui.main.ListActivity" />
     </application>
 </manifest>

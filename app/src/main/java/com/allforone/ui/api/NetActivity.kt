@@ -3,15 +3,12 @@ package com.allforone.ui.api
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.allforone.R
 import com.allforone.core.common.BaseActivity
 import com.allforone.databinding.ActNetBinding
 import com.allforone.ktx.*
 import kotlinx.android.synthetic.main.act_net.*
-import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Author : zofnk.

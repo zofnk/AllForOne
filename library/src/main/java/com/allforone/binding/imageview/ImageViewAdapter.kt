@@ -1,7 +1,10 @@
-package com.allforone.databinding
+package com.allforone.binding.imageview
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import com.allforone.binding.IMAGE_ERROR
+import com.allforone.binding.IMAGE_PLACEHOLDER
+import com.allforone.binding.IMAGE_URL
 import com.allforone.ktx.load
 
 /**
@@ -10,7 +13,7 @@ import com.allforone.ktx.load
  * Creat Time :  2019-11-28. 13:21
  * requireAll表示所有参数必须都要
  */
-class ImageViewBindingAdapter {
+class ImageViewAdapter {
     companion object {
 
         @JvmStatic

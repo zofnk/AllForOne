@@ -16,16 +16,17 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mainVM: MainViewModel
+    private lateinit var mainVM: ListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mainVM = createViewModel(MainViewModel::class.java)
+        mainVM = createViewModel(ListViewModel::class.java)
         initViews()
     }
 
     private fun initViews() {
-        tv_get.click { NetActivity.start(activity) }
+        btnNet.click { NetActivity.start(activity) }
+        btnList.click { ListActivity.start(activity) }
     }
 }
