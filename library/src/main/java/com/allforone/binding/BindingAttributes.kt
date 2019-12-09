@@ -19,7 +19,9 @@ const val type_edit = "edit_"
  * View about
  */
 const val VIEW_CLICK = "$suffix${type_view}click"
+const val VIEW_CLICK_WITH_VALUE = "$suffix${type_view}clickVal"
 const val VIEW_LONG_CLICK = "$suffix${type_view}longClick"
+const val VIEW_LONG_CLICK_WITH_VALUE = "$suffix${type_view}longClickVal"
 
 /**
  * ImageView about

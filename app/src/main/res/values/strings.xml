@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AllForOne</string>
+    <string name="kotlin">KOTLIN</string>
+    <string name="RxJava">RxJava</string>
 </resources>
