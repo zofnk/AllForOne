@@ -21,14 +21,6 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
     val viewContent = ObservableField<String>()
     private val mainRepo by lazy { NetRepository() }
 
-    fun longClick(str: String) {
-        toast("长按 -> $str")
-    }
-
-    fun click() {
-        toast("单击")
-    }
-
     fun loadDataWithRx() {
         //根据接口获取数据并反馈给v层(activity/fragment/xml)
         mainRepo.getBannerList(

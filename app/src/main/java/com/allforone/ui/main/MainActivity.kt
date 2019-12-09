@@ -7,6 +7,7 @@ import com.allforone.ktx.activity
 import com.allforone.ktx.click
 import com.allforone.ktx.createViewModel
 import com.allforone.ui.api.NetActivity
+import com.allforone.ui.click.ClickActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -28,5 +29,6 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         btnNet.click { NetActivity.start(activity) }
         btnList.click { ListActivity.start(activity) }
+        btnClick.click { ClickActivity.start(activity) }
     }
 }
