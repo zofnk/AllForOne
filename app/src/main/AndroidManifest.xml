@@ -31,5 +31,6 @@
         <activity android:name=".ui.api.NetActivity" />
         <activity android:name=".ui.main.ListActivity" />
         <activity android:name=".ui.click.ClickActivity" />
+        <activity android:name=".ui.image.ImageActivity" />
     </application>
 </manifest>

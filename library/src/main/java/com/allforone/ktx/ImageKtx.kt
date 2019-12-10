@@ -1,7 +1,9 @@
 package com.allforone.ktx
 
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
-import com.bumptech.glide.Glide
+import com.allforone.http.GlideApp
+import com.allforone.http.GlideRequest
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -49,16 +51,23 @@ fun ImageView.load(
         }
     }
     if (isBitmap) {
-        Glide.with(context)
+        GlideApp.with(context)
             .asBitmap()
             .load(url)
             .apply(options)
             .into(this)
     } else {
-        Glide.with(context)
+        GlideApp.with(context)
             .load(url)
             .apply(options)
             .apply { if (isCrossFade) transition(DrawableTransitionOptions.withCrossFade()) }
             .into(this)
     }
+}
+
+//todo 添加缩略图加载功能
+fun ImageView.loadThumbnail(
+    url: Any?
+): GlideRequest<Drawable> {
+    return GlideApp.with(ctx).load(url)
 }

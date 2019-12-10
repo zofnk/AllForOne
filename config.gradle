@@ -9,7 +9,7 @@ ext {
     material = '1.0.0'
     lifecycle = '2.1.0'
 
-    retrofit = '2.6.2'
+    retrofit = '2.7.0'
     gson_converter = '2.6.0'
 
     coroutines = '1.2.1'

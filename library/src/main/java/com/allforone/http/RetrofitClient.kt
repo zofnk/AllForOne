@@ -26,7 +26,7 @@ object RetrofitClient {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
     }
 
-    private val okHttpManager by lazy {
+     val okHttpManager by lazy {
         OkHttpClient().newBuilder()
             .connectTimeout(timeOutValue, TimeUnit.SECONDS)
             .readTimeout(timeOutValue, TimeUnit.SECONDS)
