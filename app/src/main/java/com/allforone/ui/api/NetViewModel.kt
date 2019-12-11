@@ -3,11 +3,7 @@ package com.allforone.ui.api
 import android.app.Application
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
-import com.allforone.bean.BannerBean
-import com.allforone.bean.ListResponse
-import com.allforone.bean.News
 import com.allforone.core.vm.BaseViewModel
-import com.allforone.http.function.NetObservable
 import com.allforone.ktx.toast
 
 /**
@@ -26,41 +22,26 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
         mainRepo.getBannerList(
             type = 1,
             area = 9,
-            obs = object : NetObservable<ListResponse<BannerBean>>() {
+            func = {
 
-                override fun onSuccess(t: ListResponse<BannerBean>) {
-                    content.value = t.List.toString()
-                    viewContent.set(t.List.toString())
+                onStart = {
+                    toast("开始请求")
                 }
 
-                override fun onError(msg: String) {
-                    content.value = msg
-                    viewContent.set(msg)
+                onSuccess = {
+                    content.value = it.List.toString()
+                    viewContent.set(it.List.toString())
                 }
-            })
-    }
 
-    fun api2() {
-        mainRepo.getNews(obs = object : NetObservable<List<News>>() {
+                onError = {
+                    content.value = it.msg
+                    viewContent.set(it.msg)
+                }
 
-            override fun onSuccess(t: List<News>) {
-                content.value = t[0].title
+                onComplete = {
+                    toast("请求结束")
+                }
             }
-
-            override fun onError(msg: String) {
-            }
-        })
-    }
-
-    fun api3() {
-        mainRepo.getNews(obs = object : NetObservable<List<News>>() {
-
-            override fun onSuccess(t: List<News>) {
-                content.value = t[0].title
-            }
-
-            override fun onError(msg: String) {
-            }
-        })
+        )
     }
 }

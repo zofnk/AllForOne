@@ -1,4 +1,4 @@
-package com.allforone.ui.main
+package com.allforone.ui.simplelist
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,7 @@ import com.allforone.R
 import com.allforone.core.common.BaseActivity
 import com.allforone.databinding.ActListBinding
 import com.allforone.ktx.createViewModel
+import com.allforone.ui.main.ListViewModel
 import kotlinx.android.synthetic.main.act_list.*
 
 /**

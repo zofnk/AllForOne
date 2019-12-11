@@ -3,6 +3,7 @@ package com.allforone.ktx
 import com.allforone.data.NetResponse
 import com.allforone.http.ApiConverts
 import com.allforone.http.function.NetExceptionObservable
+import com.allforone.http.function.NetObservable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -26,3 +27,7 @@ val <T, R : NetResponse<T>> Observable<R>.responseTransformer: Observable<T>
     get() = scheduleTransformer
         .map(ApiConverts())
         .onErrorResumeNext(NetExceptionObservable())
+
+inline fun <T> Observable<T>.toSubscribe(func: NetObservable<T>.() -> Unit) {
+    subscribe(NetObservable<T>().apply { func() })
+}

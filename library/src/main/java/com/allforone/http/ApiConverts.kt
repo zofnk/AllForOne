@@ -12,7 +12,7 @@ import io.reactivex.functions.Function
 class ApiConverts<T> : Function<NetResponse<T>, T> {
 
     override fun apply(t: NetResponse<T>): T {
-        if (!t.isSuccess()) throw RuntimeException(t.toJson())
+        if (!t.isSuccess()) throw ResponseException(t.toJson())
         return t.response()
     }
 }

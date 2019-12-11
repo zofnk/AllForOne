@@ -9,6 +9,7 @@ import com.allforone.ktx.createViewModel
 import com.allforone.ui.api.NetActivity
 import com.allforone.ui.click.ClickActivity
 import com.allforone.ui.image.ImageActivity
+import com.allforone.ui.simplelist.ListActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**

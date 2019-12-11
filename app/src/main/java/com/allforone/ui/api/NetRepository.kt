@@ -5,8 +5,10 @@ import com.allforone.bean.ListResponse
 import com.allforone.bean.News
 import com.allforone.core.repo.BaseRepository
 import com.allforone.http.createApi
+import com.allforone.http.function.NetObservable
 import com.allforone.ktx.responseTransformer
 import com.allforone.ktx.scheduleTransformer
+import com.allforone.ktx.toSubscribe
 import io.reactivex.Observer
 
 /**
@@ -24,12 +26,12 @@ class NetRepository : BaseRepository() {
     fun getBannerList(
         type: Int,
         area: Int,
-        obs: Observer<ListResponse<BannerBean>>
+        func: NetObservable<ListResponse<BannerBean>>.() -> Unit
     ) {
         api.banner(type = type, area = area)
             .scheduleTransformer
             .responseTransformer
-            .subscribe(obs)
+            .toSubscribe(func)
     }
 
     fun getNews(
