@@ -5,7 +5,8 @@ import com.allforone.bean.ListResponse
 import com.allforone.bean.News
 import com.allforone.core.repo.BaseRepository
 import com.allforone.http.createApi
-import com.allforone.ktx.converts
+import com.allforone.ktx.responseTransformer
+import com.allforone.ktx.scheduleTransformer
 import io.reactivex.Observer
 
 /**
@@ -26,7 +27,8 @@ class NetRepository : BaseRepository() {
         obs: Observer<ListResponse<BannerBean>>
     ) {
         api.banner(type = type, area = area)
-            .converts
+            .scheduleTransformer
+            .responseTransformer
             .subscribe(obs)
     }
 
@@ -36,7 +38,8 @@ class NetRepository : BaseRepository() {
         obs: Observer<List<News>>
     ) {
         api2.getNews(type, key)
-            .converts
+            .scheduleTransformer
+            .responseTransformer
             .map { it.data }
             .subscribe(obs)
     }

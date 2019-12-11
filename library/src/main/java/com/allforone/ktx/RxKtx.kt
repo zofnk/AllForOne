@@ -12,12 +12,17 @@ import io.reactivex.schedulers.Schedulers
  * Email : zofnk@vip.qq.com.
  * Creat Time :  11.21. 23:01
  */
-//切换线程
-val <T> Observable<T>.schedule: Observable<T>
+
+/**
+ * 线程调度器
+ */
+val <T> Observable<T>.scheduleTransformer: Observable<T>
     get() = subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
-//项目实体类转换
-val <T, R : NetResponse<T>> Observable<R>.converts: Observable<T>
-    get() = schedule
+/**
+ * 请求转换器
+ */
+val <T, R : NetResponse<T>> Observable<R>.responseTransformer: Observable<T>
+    get() = scheduleTransformer
         .map(ApiConverts())
         .onErrorResumeNext(NetExceptionObservable())

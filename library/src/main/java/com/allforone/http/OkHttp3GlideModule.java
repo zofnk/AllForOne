@@ -14,6 +14,8 @@ import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.InputStream;
 
 import okhttp3.OkHttpClient;
@@ -27,7 +29,7 @@ import okhttp3.OkHttpClient;
 public class OkHttp3GlideModule extends AppGlideModule {
 
     @Override
-    public void registerComponents(Context context, Glide glide, Registry registry) {
+    public void registerComponents(@NotNull Context context, Glide glide, @NotNull Registry registry) {
         OkHttpClient client = RetrofitClient.INSTANCE.getOkHttpManager().build();
         OkHttpUrlLoader.Factory factory = new OkHttpUrlLoader.Factory(client);
         glide.getRegistry().replace(GlideUrl.class, InputStream.class, factory);

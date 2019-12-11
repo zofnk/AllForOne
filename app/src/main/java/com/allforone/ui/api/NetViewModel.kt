@@ -51,4 +51,16 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
             }
         })
     }
+
+    fun api3() {
+        mainRepo.getNews(obs = object : NetObservable<List<News>>() {
+
+            override fun onSuccess(t: List<News>) {
+                content.value = t[0].title
+            }
+
+            override fun onError(msg: String) {
+            }
+        })
+    }
 }

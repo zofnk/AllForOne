@@ -3,42 +3,12 @@ package com.allforone.ktx
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
-import com.allforone.data.NetResponse
 
 /**
  * Author : zofnk.
  * Email : zofnk@vip.qq.com.
- * Creat Time :  2019-11-22. 16:23
+ * Create Time :  2019-11-22. 16:23
  */
 val AndroidViewModel.ctx: Context get() = getApplication<Application>().applicationContext
 
-class data<T> {
-    val message: String = ""
-    val code: Int = 0
-    val data: nest? = null
-
-    inner class nest {
-        val message: String = ""
-        val code: Int = 0
-        val data: T? = null
-    }
-}
-
-class Outter : NetResponse<ApiResult>() {
-
-    val jsonrpc: String = ""
-    val id: String = ""
-    val resultXXX: ApiResult = ApiResult()
-
-    override fun isSuccess() = resultXXX.success
-
-    override fun response(): ApiResult = resultXXX
-
-}
-
-class ApiResult {
-    val result: String = ""
-    val resultMessage = ""
-    val success: Boolean = false
-}
-
+fun AndroidViewModel.resString(resId: Int): String = ctx.resources.getString(resId)

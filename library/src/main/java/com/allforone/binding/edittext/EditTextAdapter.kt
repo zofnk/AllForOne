@@ -11,13 +11,12 @@ import com.allforone.binding.EDIT_TOGGLE_PASSWORD
  * Email : zofnk@vip.qq.com.
  * Creat Time :  11.30. 00:21
  */
-class EditTextAdapter {
-    companion object {
+object EditTextAdapter {
 
-        @JvmStatic
-        @BindingAdapter(EDIT_TOGGLE_PASSWORD)
-        fun EditText.togglePassword(show: Boolean) {
-            transformationMethod = if (show) HideReturnsTransformationMethod.getInstance() else PasswordTransformationMethod.getInstance()
-        }
+    @JvmStatic
+    @BindingAdapter(EDIT_TOGGLE_PASSWORD)
+    fun EditText.togglePassword(show: Boolean) {
+        transformationMethod =
+            if (show) HideReturnsTransformationMethod.getInstance() else PasswordTransformationMethod.getInstance()
     }
 }

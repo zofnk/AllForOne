@@ -28,6 +28,7 @@ class ImageActivity : BaseActivity<ActImageBinding>() {
 
     override fun onCreated(savedInstanceState: Bundle?) {
         imageViewModel = createViewModel(ImageViewModel::class.java)
+        layoutBinding.vm = imageViewModel
 
         rvImage.adapter = imageViewModel.imageAdapter
     }
