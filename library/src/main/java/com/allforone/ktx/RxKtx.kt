@@ -1,10 +1,11 @@
 package com.allforone.ktx
 
 import com.allforone.data.NetResponse
-import com.allforone.http.ApiConverts
+import com.allforone.http.ResponseHandle
 import com.allforone.http.function.NetExceptionObservable
-import com.allforone.http.function.NetObservable
+import com.allforone.http.function.HandleResponseObservable
 import io.reactivex.Observable
+import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -17,17 +18,37 @@ import io.reactivex.schedulers.Schedulers
 /**
  * 线程调度器
  */
-val <T> Observable<T>.scheduleTransformer: Observable<T>
-    get() = subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+fun <T> Observable<T>.scheduleTransformer(): Observable<T> =
+    subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
 
 /**
  * 请求转换器
  */
-val <T, R : NetResponse<T>> Observable<R>.responseTransformer: Observable<T>
-    get() = scheduleTransformer
-        .map(ApiConverts())
+fun <T, R : NetResponse<T>> Observable<R>.responseTransformer(): Observable<T> =
+    scheduleTransformer()
+        .map(ResponseHandle())
         .onErrorResumeNext(NetExceptionObservable())
 
-inline fun <T> Observable<T>.toSubscribe(func: NetObservable<T>.() -> Unit) {
-    subscribe(NetObservable<T>().apply { func() })
+fun <T> schedulersTransformer(): ObservableTransformer<T, T> {
+    return ObservableTransformer { upstream ->
+        upstream
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+}
+
+fun <T : NetResponse<T>> responseTransformaer(): ObservableTransformer<T, T> {
+    return ObservableTransformer { upstream ->
+        upstream
+            .map<T>(ResponseHandle())
+            .onErrorResumeNext(NetExceptionObservable())
+    }
+}
+
+inline fun <T> Observable<T>.responseSubscribe(func: HandleResponseObservable<T>.() -> Unit) {
+    subscribe(HandleResponseObservable<T>()
+        .apply {
+            func()
+        })
 }

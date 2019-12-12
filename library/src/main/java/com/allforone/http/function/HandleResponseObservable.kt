@@ -9,7 +9,7 @@ import io.reactivex.observers.DisposableObserver
  * Email : zofnk@vip.qq.com.
  * Creat Time :  2019-11-22. 14:58
  */
-class NetObservable<T> : DisposableObserver<T>() {
+class HandleResponseObservable<T> : DisposableObserver<T>() {
 
     lateinit var onStart: () -> Unit
 
@@ -32,7 +32,7 @@ class NetObservable<T> : DisposableObserver<T>() {
     }
 
     override fun onError(e: Throwable) {
-        e.printTrace()
         onError.invoke(e as ApiException)
+        e.printTrace()
     }
 }

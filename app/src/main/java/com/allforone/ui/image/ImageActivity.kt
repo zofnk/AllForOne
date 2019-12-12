@@ -6,7 +6,6 @@ import android.os.Bundle
 import com.allforone.R
 import com.allforone.core.common.BaseActivity
 import com.allforone.databinding.ActImageBinding
-import com.allforone.ktx.createViewModel
 import kotlinx.android.synthetic.main.act_image.*
 
 /**
@@ -14,9 +13,7 @@ import kotlinx.android.synthetic.main.act_image.*
  * Email : zofnk@vip.qq.com.
  * Create Time :  2019-12-10. 10:27
  */
-class ImageActivity : BaseActivity<ActImageBinding>() {
-
-    private lateinit var imageViewModel: ImageViewModel
+class ImageActivity : BaseActivity<ActImageBinding,ImageViewModel>() {
 
     companion object {
         fun start(ctx: Context) {
@@ -27,9 +24,8 @@ class ImageActivity : BaseActivity<ActImageBinding>() {
     override fun bindLayoutId() = R.layout.act_image
 
     override fun onCreated(savedInstanceState: Bundle?) {
-        imageViewModel = createViewModel(ImageViewModel::class.java)
-        layoutBinding.vm = imageViewModel
+        layoutBinding.vm = viewModel
 
-        rvImage.adapter = imageViewModel.imageAdapter
+        rvImage.adapter = viewModel.imageAdapter
     }
 }

@@ -6,7 +6,6 @@ import android.os.Bundle
 import com.allforone.R
 import com.allforone.core.common.BaseActivity
 import com.allforone.databinding.ActListBinding
-import com.allforone.ktx.createViewModel
 import com.allforone.ui.main.ListViewModel
 import kotlinx.android.synthetic.main.act_list.*
 
@@ -15,7 +14,7 @@ import kotlinx.android.synthetic.main.act_list.*
  * Email : zofnk@vip.qq.com.
  * Creat Time :  11.21. 20:12
  */
-class ListActivity : BaseActivity<ActListBinding>() {
+class ListActivity : BaseActivity<ActListBinding, ListViewModel>() {
 
     companion object {
         fun start(ctx: Context) {
@@ -25,12 +24,9 @@ class ListActivity : BaseActivity<ActListBinding>() {
 
     override fun bindLayoutId() = R.layout.act_list
 
-    private lateinit var listVM: ListViewModel
-
     override fun onCreated(savedInstanceState: Bundle?) {
-        listVM = createViewModel(ListViewModel::class.java)
-        layoutBinding.vm = listVM
+        layoutBinding.vm = viewModel
 
-        rvTest.adapter = listVM.simpleAdapter
+        rvTest.adapter = viewModel.simpleAdapter
     }
 }

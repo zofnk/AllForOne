@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import com.allforone.R
 import com.allforone.core.common.BaseActivity
 import com.allforone.databinding.ActNetBinding
-import com.allforone.ktx.*
+import com.allforone.ktx.click
 import kotlinx.android.synthetic.main.act_net.*
 
 /**
@@ -15,9 +15,7 @@ import kotlinx.android.synthetic.main.act_net.*
  * Email : zofnk@vip.qq.com.
  * Creat Time :  11.28. 22:18
  */
-class NetActivity : BaseActivity<ActNetBinding>() {
-
-    private lateinit var netVm: NetViewModel
+class NetActivity : BaseActivity<ActNetBinding,NetViewModel>() {
 
     companion object {
         fun start(ctx: Context) {
@@ -28,10 +26,9 @@ class NetActivity : BaseActivity<ActNetBinding>() {
     override fun bindLayoutId() = R.layout.act_net
 
     override fun onCreated(savedInstanceState: Bundle?) {
-        netVm = createViewModel(NetViewModel::class.java)
-        layoutBinding.vm = netVm
+        layoutBinding.vm = viewModel
 
-        tvApiRxGet.click { netVm.loadDataWithRx() }
-        netVm.content.observe(this, Observer { tvApiResult.text = it })
+        tvApiRxGet.click { viewModel.loadDataWithRx() }
+        viewModel.content.observe(this, Observer { tvApiResult.text = it })
     }
 }
