@@ -1,6 +1,7 @@
 package com.allforone.ui.api
 
 import com.allforone.core.repo.BaseRepository
+import com.allforone.http.BASE_URL_JUHE
 import com.allforone.http.createApi
 import com.allforone.ktx.responseTransformer
 import com.allforone.ktx.scheduleTransformer
@@ -8,13 +9,13 @@ import com.allforone.ktx.scheduleTransformer
 /**
  * Author : zofnk.
  * Email : zofnk@vip.qq.com.
- * Creat Time :  2019-11-29. 09:02
+ * Create Time :  2019-11-29. 09:02
  */
 class NetRepository : BaseRepository() {
 
     private val api by lazy { createApi(NetApi::class.java) }
 
-    private val api2 by lazy { createApi(NetApi::class.java, "https://v.juhe.cn/") }
+    private val api2 by lazy { createApi(NetApi::class.java, BASE_URL_JUHE) }
 
     //获取请求来的数据
     fun getBannerList(
@@ -22,6 +23,16 @@ class NetRepository : BaseRepository() {
         area: Int
     ) = api
         .banner(type = type, area = area)
+        .scheduleTransformer()
+        .responseTransformer()
+
+    fun searchAnimation(
+        key: String,
+        page: Int = 1,
+        size: Int = 1000,
+        token: String = ""
+    ) = api
+        .searchAnimation(key, page, size, token)
         .scheduleTransformer()
         .responseTransformer()
 
@@ -33,7 +44,6 @@ class NetRepository : BaseRepository() {
         .scheduleTransformer()
         .responseTransformer()
         .map { it.data }
-
 
     //获取数据库数据 eg:
 //    fun getData2Database() = "..."

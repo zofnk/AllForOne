@@ -1,12 +1,10 @@
 package com.allforone.ui.api
 
 import android.app.Application
-import androidx.databinding.ObservableField
-import androidx.lifecycle.MutableLiveData
 import com.allforone.core.vm.BaseViewModel
-import com.allforone.ktx.injectLifecycle
-import com.allforone.ktx.responseSubscribe
-import com.allforone.ktx.toast
+import com.allforone.ktx.*
+import com.allforone.livedata.SingleLiveData
+import io.reactivex.Observable
 
 /**
  * Author : zofnk.
@@ -15,34 +13,85 @@ import com.allforone.ktx.toast
  */
 class NetViewModel(app: Application) : BaseViewModel(app) {
 
-    val content = MutableLiveData<String>()
-    val viewContent = ObservableField<String>()
+    val resultTask = SingleLiveData<String>()
     private val mainRepo by lazy { NetRepository() }
 
+    //rx基本请求
     fun loadDataWithRx() {
         mainRepo
             .getBannerList(type = 1, area = 9)
             .compose(injectLifecycle())
             .responseSubscribe {
 
-                onStart = {
-                    toast("开始请求")
-                }
-
                 onSuccess = {
-                    content.value = it.List.toString()
-                    viewContent.set(it.List.toString())
+                    resultTask.postValue(it.List[0].Title)
                 }
 
                 onError = {
-                    content.value = it.msg
-                    viewContent.set(it.msg)
                     toast(it.msg)
                 }
+            }
+    }
 
-                onComplete = {
-                    toast("请求结束")
+    //rx嵌套请求
+    fun nestedRequestWithRxjava() {
+        val sb = StringBuffer()
+        mainRepo
+            .getBannerList(type = 1, area = 9)
+            .map {
+                sb.append("第一层请求结果: \n")
+                    .append(it.List[0].Title)
+                    .append("\n\n")
+                it
+            }
+            .flatMap { mainRepo.searchAnimation("一") }
+            .compose(injectLifecycle())
+            .responseSubscribe {
+
+                onSuccess = {
+                    sb.append("第二层请求结果:\n")
+                        .append(it.List[0].Name)
+                    resultTask.postValue(sb.toString())
+                }
+
+                onError = {
+                    sb.append(it.msg)
+                    resultTask.postValue(sb.toString())
                 }
             }
+    }
+
+    //rx合并请求
+    fun mergeRequestWithRxjava() {
+        val sb = StringBuffer()
+
+        Observable.mergeDelayError(
+            mainRepo.getBannerList(type = 1, area = 9)
+                .handleNext {
+                    sb.append(it.List[0].Title + '\n')
+                }
+                .handleError {
+                    sb.append(it.msg + '\n')
+                },
+            mainRepo.searchAnimation(key = "一")
+                .handleNext {
+                    sb.append(it.List[0].Name + '\n')
+                }
+                .handleError {
+                    sb.append(it.msg + '\n')
+                }
+        )
+            .compose(injectLifecycle())
+            .responseSubscribe {
+
+                onComplete = {
+                    resultTask.postValue(sb.toString())
+                }
+
+                onError = {
+                    resultTask.postValue(sb.toString())
+                }
+            }
+
     }
 }

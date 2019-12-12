@@ -8,6 +8,7 @@ import com.allforone.R
 import com.allforone.core.common.BaseActivity
 import com.allforone.databinding.ActNetBinding
 import com.allforone.ktx.click
+import com.lxj.xpopup.XPopup
 import kotlinx.android.synthetic.main.act_net.*
 
 /**
@@ -15,7 +16,7 @@ import kotlinx.android.synthetic.main.act_net.*
  * Email : zofnk@vip.qq.com.
  * Creat Time :  11.28. 22:18
  */
-class NetActivity : BaseActivity<ActNetBinding,NetViewModel>() {
+class NetActivity : BaseActivity<ActNetBinding, NetViewModel>() {
 
     companion object {
         fun start(ctx: Context) {
@@ -28,7 +29,11 @@ class NetActivity : BaseActivity<ActNetBinding,NetViewModel>() {
     override fun onCreated(savedInstanceState: Bundle?) {
         layoutBinding.vm = viewModel
 
-        tvApiRxGet.click { viewModel.loadDataWithRx() }
-        viewModel.content.observe(this, Observer { tvApiResult.text = it })
+        val pop = XPopup.Builder(this)
+
+        viewModel.resultTask.observe(this, Observer {
+            pop.asConfirm("result", it, null)
+                .show()
+        })
     }
 }

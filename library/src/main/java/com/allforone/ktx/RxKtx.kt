@@ -1,6 +1,7 @@
 package com.allforone.ktx
 
 import com.allforone.data.NetResponse
+import com.allforone.http.ApiException
 import com.allforone.http.ResponseHandle
 import com.allforone.http.function.NetExceptionObservable
 import com.allforone.http.function.HandleResponseObservable
@@ -12,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Author : zofnk.
  * Email : zofnk@vip.qq.com.
- * Creat Time :  11.21. 23:01
+ * Create Time :  11.21. 23:01
  */
 
 /**
@@ -38,7 +39,7 @@ fun <T> schedulersTransformer(): ObservableTransformer<T, T> {
     }
 }
 
-fun <T : NetResponse<T>> responseTransformaer(): ObservableTransformer<T, T> {
+fun <T : NetResponse<T>> responseTransformer(): ObservableTransformer<T, T> {
     return ObservableTransformer { upstream ->
         upstream
             .map<T>(ResponseHandle())
@@ -52,3 +53,9 @@ inline fun <T> Observable<T>.responseSubscribe(func: HandleResponseObservable<T>
             func()
         })
 }
+
+fun <T> Observable<T>.handleError(func: (ApiException) -> Unit): Observable<T> = doOnError {
+    func.invoke(it.exceptionTransformer())
+}
+
+fun <T> Observable<T>.handleNext(func: (T) -> Unit): Observable<T> = doOnNext { func.invoke(it) }

@@ -27,4 +27,12 @@ interface NetApi {
         @Query("pageSize") size: Int = 10,
         @Query("area") area: Int
     ): Observable<ApiBaseResp<ListResponse<BannerBean>>>
+
+    @GET("/animes?search")
+    fun searchAnimation(
+        @Query("keyword") key: String,
+        @Query("pageIndex") page: Int,
+        @Query("pageSize") size: Int,
+        @Query("loginToken") token: String
+    ): Observable<ApiBaseResp<SearchListBean<SearchBean>>>
 }

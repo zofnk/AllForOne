@@ -23,15 +23,15 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:gravity="center_vertical"
                 android:paddingStart="20dp"
-                android:text="get:"
+                android:text="基本请求:"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <Button
-                android:id="@+id/tvApiRxGet"
+                android:id="@+id/tvRequestSimple"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
@@ -51,22 +51,23 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
                 android:paddingStart="20dp"
-                android:text="post:"
+                android:text="嵌套请求:"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <Button
-                android:id="@+id/tvApiRxPost"
+                android:id="@+id/tvRequestNest"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
                 android:text="@string/RxJava"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                app:view_click="@{() -> vm.nestedRequestWithRxjava()}" />
 
             <Button
                 android:id="@+id/tvApiKtPost"
@@ -77,51 +78,33 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:paddingStart="20dp"
+                android:text="合并请求:"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="mvvm:"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="in databinding:"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
+            <Button
+                android:id="@+id/tvRequestMerge"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="@string/RxJava"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:view_click="@{() -> vm.mergeRequestWithRxjava()}" />
 
-                <TextView
-                    android:id="@+id/tvApiResult"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@{vm.viewContent}"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
-            </LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="@string/kotlin"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

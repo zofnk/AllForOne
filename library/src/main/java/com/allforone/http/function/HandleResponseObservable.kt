@@ -1,6 +1,7 @@
 package com.allforone.http.function
 
 import com.allforone.http.ApiException
+import com.allforone.ktx.exceptionTransformer
 import com.allforone.ktx.printTrace
 import io.reactivex.observers.DisposableObserver
 
@@ -11,36 +12,30 @@ import io.reactivex.observers.DisposableObserver
  */
 class HandleResponseObservable<T> : DisposableObserver<T>() {
 
-    lateinit var onStart: () -> Unit
+    var onStart: (() -> Unit?)? = null
 
-    lateinit var onSuccess: (T) -> Unit
+    var onSuccess: ((T) -> Unit)? = null
 
-    lateinit var onError: (ApiException) -> Unit
+    var onError: ((ApiException) -> Unit)? = null
 
-    lateinit var onComplete: () -> Unit
+    var onComplete: (() -> Unit)? = null
 
     override fun onStart() {
-        onStart.invoke()
+        onStart?.invoke()
     }
 
     override fun onComplete() {
-        onComplete.invoke()
+        onComplete?.invoke()
     }
 
     override fun onNext(t: T) {
-        onSuccess.invoke(t)
+        onSuccess?.invoke(t)
     }
 
     override fun onError(e: Throwable) {
         e.apply {
             printStackTrace()
-            onError.invoke(
-                if (this is ApiException) {
-                    this
-                } else {
-                    ApiException(this, 0, message ?: "")
-                }
-            )
+            onError?.invoke(exceptionTransformer())
         }
     }
 }
