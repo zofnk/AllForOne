@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.allforone.core.vm.BaseViewModel
-import com.allforone.ktx.bindLifecycle
+import com.allforone.ktx.injectLifecycle
 import com.allforone.ktx.responseSubscribe
 import com.allforone.ktx.toast
 
@@ -22,7 +22,7 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
     fun loadDataWithRx() {
         mainRepo
             .getBannerList(type = 1, area = 9)
-            .compose(bindLifecycle())
+            .compose(injectLifecycle())
             .responseSubscribe {
 
                 onStart = {

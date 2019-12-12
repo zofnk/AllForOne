@@ -32,7 +32,15 @@ class HandleResponseObservable<T> : DisposableObserver<T>() {
     }
 
     override fun onError(e: Throwable) {
-        onError.invoke(e as ApiException)
-        e.printTrace()
+        e.apply {
+            printStackTrace()
+            onError.invoke(
+                if (this is ApiException) {
+                    this
+                } else {
+                    ApiException(this, 0, message ?: "")
+                }
+            )
+        }
     }
 }

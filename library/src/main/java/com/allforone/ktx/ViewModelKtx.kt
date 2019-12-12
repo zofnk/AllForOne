@@ -14,4 +14,4 @@ val AndroidViewModel.ctx: Context get() = getApplication<Application>().applicat
 
 fun AndroidViewModel.resString(resId: Int): String = ctx.resources.getString(resId)
 
-fun <T> BaseViewModel.bindLifecycle() = lifecycleProvider?.bindToLifecycle<T>()
+fun <T> BaseViewModel.injectLifecycle() = lifecycleProvider?.bindToLifecycle<T>()
