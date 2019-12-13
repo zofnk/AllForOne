@@ -10,6 +10,7 @@ import com.allforone.http.function.CoroutineResponseHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Author : zofnk.
@@ -22,6 +23,22 @@ fun AndroidViewModel.resString(resId: Int): String = ctx.resources.getString(res
 
 fun <T> BaseViewModel.injectLifecycle() = lifecycleProvider?.bindToLifecycle<T>()
 
+suspend fun <T> AndroidViewModel.dispatchersIO(
+    dispatcher: CoroutineContext = Dispatchers.IO,
+    func: suspend () -> T
+): T =
+    withContext(dispatcher) {
+        func.invoke()
+    }
+
+suspend fun <T> AndroidViewModel.dispatchersMain(
+    func: suspend () -> T
+): T =
+    dispatchersIO(Dispatchers.Main) {
+        func.invoke()
+    }
+
+
 fun <T> AndroidViewModel.createRequest(func: CoroutineResponseHandler<T>.() -> Unit) {
 
     val responseHandler = CoroutineResponseHandler<T>()
@@ -30,14 +47,14 @@ fun <T> AndroidViewModel.createRequest(func: CoroutineResponseHandler<T>.() -> U
         }
 
     viewModelScope.launch {
-        withContext(Dispatchers.Main) {
+        dispatchersMain {
             responseHandler.onStart?.invoke()
         }
         try {
-            val response = withContext(Dispatchers.IO) {
+            val response = dispatchersIO {
                 responseHandler.onRequest?.invoke()
             }
-            withContext(Dispatchers.Main) {
+            dispatchersMain {
                 responseHandler.onSuccess?.invoke(response!!)
             }
         } catch (e: Exception) {
