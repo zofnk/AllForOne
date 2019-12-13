@@ -1,6 +1,9 @@
 package com.allforone.ui.api
 
 import android.app.Application
+import com.allforone.bean.ApiBaseResp
+import com.allforone.bean.SearchBean
+import com.allforone.bean.SearchListBean
 import com.allforone.core.vm.BaseViewModel
 import com.allforone.ktx.*
 import com.allforone.livedata.SingleLiveData
@@ -19,18 +22,36 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
     //rx基本请求
     fun loadDataWithRx() {
         mainRepo
-            .getBannerList(type = 1, area = 9)
+            .searchAnimation("一")
             .compose(injectLifecycle())
             .responseSubscribe {
 
                 onSuccess = {
-                    resultTask.postValue(it.List[0].Title)
+                    resultTask.postValue(it.List[0].Name)
                 }
 
                 onError = {
                     toast(it.msg)
                 }
             }
+    }
+
+    //kotlin基本请求
+    fun loadDataWithKotlin() {
+        createRequest<SearchListBean<SearchBean>> {
+
+            onRequest = {
+                mainRepo.searchAnimation2(key = "一")
+            }
+
+            onSuccess = {
+                resultTask.postValue(it.List[0].Name)
+            }
+
+            onError = {
+                toast(it.msg)
+            }
+        }
     }
 
     //rx嵌套请求

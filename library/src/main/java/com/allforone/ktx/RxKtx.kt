@@ -2,9 +2,10 @@ package com.allforone.ktx
 
 import com.allforone.data.NetResponse
 import com.allforone.http.ApiException
+import com.allforone.http.ResponseException
 import com.allforone.http.ResponseHandle
-import com.allforone.http.function.NetExceptionObservable
 import com.allforone.http.function.HandleResponseObservable
+import com.allforone.http.function.NetExceptionObservable
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -31,6 +32,12 @@ fun <T, R : NetResponse<T>> Observable<R>.responseTransformer(): Observable<T> =
         .map(ResponseHandle())
         .onErrorResumeNext(NetExceptionObservable())
 
+//实体类转换器
+fun <T> NetResponse<T>.responseTransformer(): T {
+    if (!isSuccess()) throw ResponseException(toJson())
+    return response()
+}
+
 fun <T> schedulersTransformer(): ObservableTransformer<T, T> {
     return ObservableTransformer { upstream ->
         upstream
@@ -47,6 +54,7 @@ fun <T : NetResponse<T>> responseTransformer(): ObservableTransformer<T, T> {
     }
 }
 
+//subscribe封装
 inline fun <T> Observable<T>.responseSubscribe(func: HandleResponseObservable<T>.() -> Unit) {
     subscribe(HandleResponseObservable<T>()
         .apply {
@@ -54,8 +62,10 @@ inline fun <T> Observable<T>.responseSubscribe(func: HandleResponseObservable<T>
         })
 }
 
+//代替doOnError
 fun <T> Observable<T>.handleError(func: (ApiException) -> Unit): Observable<T> = doOnError {
     func.invoke(it.exceptionTransformer())
 }
 
+//代替doOnNext
 fun <T> Observable<T>.handleNext(func: (T) -> Unit): Observable<T> = doOnNext { func.invoke(it) }

@@ -36,6 +36,16 @@ class NetRepository : BaseRepository() {
         .scheduleTransformer()
         .responseTransformer()
 
+    suspend fun searchAnimation2(
+        key: String,
+        page: Int = 1,
+        size: Int = 1000,
+        token: String = ""
+    ) = api
+        .searchAnimation2(key, page, size, token)
+        .responseTransformer()
+
+
     fun getNews(
         type: String = "top",
         key: String = "9f552a8aca577737335c7106f1236a97"

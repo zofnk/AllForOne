@@ -14,6 +14,10 @@ import retrofit2.http.Query
  */
 interface NetApi {
 
+    /**
+     * RxJava
+     */
+
     @POST("toutiao/index")
     fun postNews(@Query("type") version: String, @Query("key") key: String): Observable<newss>
 
@@ -35,4 +39,17 @@ interface NetApi {
         @Query("pageSize") size: Int,
         @Query("loginToken") token: String
     ): Observable<ApiBaseResp<SearchListBean<SearchBean>>>
+
+
+    /**
+     * Kotlin Coroutine
+     */
+
+    @GET("/animes?search")
+    suspend fun searchAnimation2(
+        @Query("keyword") key: String,
+        @Query("pageIndex") page: Int,
+        @Query("pageSize") size: Int,
+        @Query("loginToken") token: String
+    ): ApiBaseResp<SearchListBean<SearchBean>>
 }
