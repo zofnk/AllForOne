@@ -23,7 +23,7 @@ fun AndroidViewModel.resString(resId: Int): String = ctx.resources.getString(res
 
 fun <T> BaseViewModel.injectLifecycle() = lifecycleProvider?.bindToLifecycle<T>()
 
-suspend fun <T> AndroidViewModel.dispatchersIO(
+suspend fun <T> AndroidViewModel.scheduleIO(
     dispatcher: CoroutineContext = Dispatchers.IO,
     func: suspend () -> T
 ): T =
@@ -31,10 +31,17 @@ suspend fun <T> AndroidViewModel.dispatchersIO(
         func.invoke()
     }
 
-suspend fun <T> AndroidViewModel.dispatchersMain(
+suspend fun <T> AndroidViewModel.scheduleMain(
     func: suspend () -> T
 ): T =
-    dispatchersIO(Dispatchers.Main) {
+    scheduleIO(Dispatchers.Main) {
+        func.invoke()
+    }
+
+suspend fun <T> AndroidViewModel.scheduleDefault(
+    func: suspend () -> T
+): T =
+    scheduleIO(Dispatchers.Default) {
         func.invoke()
     }
 
@@ -47,14 +54,14 @@ fun <T> AndroidViewModel.createRequest(func: CoroutineResponseHandler<T>.() -> U
         }
 
     viewModelScope.launch {
-        dispatchersMain {
+        scheduleMain {
             responseHandler.onStart?.invoke()
         }
         try {
-            val response = dispatchersIO {
+            val response = scheduleIO {
                 responseHandler.onRequest?.invoke()
             }
-            dispatchersMain {
+            scheduleMain {
                 responseHandler.onSuccess?.invoke(response!!)
             }
         } catch (e: Exception) {

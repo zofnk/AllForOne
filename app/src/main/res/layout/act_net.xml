@@ -77,7 +77,8 @@
                 android:gravity="center"
                 android:text="@string/kotlin"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                app:view_click="@{() -> vm.nestedRequestWithKotlin()}" />
 
             <TextView
                 android:layout_width="match_parent"

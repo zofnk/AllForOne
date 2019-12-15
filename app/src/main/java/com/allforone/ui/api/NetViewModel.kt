@@ -1,9 +1,7 @@
 package com.allforone.ui.api
 
 import android.app.Application
-import com.allforone.bean.ApiBaseResp
-import com.allforone.bean.SearchBean
-import com.allforone.bean.SearchListBean
+import com.allforone.bean.*
 import com.allforone.core.vm.BaseViewModel
 import com.allforone.ktx.*
 import com.allforone.livedata.SingleLiveData
@@ -80,6 +78,29 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
                     resultTask.postValue(sb.toString())
                 }
             }
+    }
+
+    //Kotlin嵌套请求
+    fun nestedRequestWithKotlin() {
+        createRequest<SearchListBean<SearchBean>> {
+
+            val sb = StringBuffer()
+
+            onRequest = {
+                val bean = mainRepo.getBanner(type = 1, area = 9)
+                sb.append(bean.List[0].Title + '\n')
+                mainRepo.searchAnimation2("一")
+            }
+
+            onSuccess = {
+                sb.append(it.List[0].Name)
+                resultTask.postValue(sb.toString())
+            }
+
+            onError = {
+                toast(it.msg)
+            }
+        }
     }
 
     //rx合并请求

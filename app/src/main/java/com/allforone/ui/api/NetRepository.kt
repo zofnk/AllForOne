@@ -17,7 +17,9 @@ class NetRepository : BaseRepository() {
 
     private val api2 by lazy { createApi(NetApi::class.java, BASE_URL_JUHE) }
 
-    //获取请求来的数据
+    /**
+     * RxJava
+     */
     fun getBannerList(
         type: Int,
         area: Int
@@ -34,6 +36,17 @@ class NetRepository : BaseRepository() {
     ) = api
         .searchAnimation(key, page, size, token)
         .scheduleTransformer()
+        .responseTransformer()
+
+
+    /**
+     * Kotlin
+     */
+    suspend fun getBanner(
+        type: Int,
+        area: Int
+    ) = api
+        .banner2(type = type, area = area)
         .responseTransformer()
 
     suspend fun searchAnimation2(

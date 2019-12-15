@@ -45,6 +45,14 @@ interface NetApi {
      * Kotlin Coroutine
      */
 
+    @GET("/animes?AdList")
+    suspend fun banner2(
+        @Query("areaType") type: Int,
+        @Query("pageIndex") page: Int = 1,
+        @Query("pageSize") size: Int = 10,
+        @Query("area") area: Int
+    ): ApiBaseResp<ListResponse<BannerBean>>
+
     @GET("/animes?search")
     suspend fun searchAnimation2(
         @Query("keyword") key: String,
