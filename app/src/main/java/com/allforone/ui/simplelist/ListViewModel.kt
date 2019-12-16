@@ -2,8 +2,7 @@ package com.allforone.ui.main
 
 import android.app.Application
 import androidx.databinding.ObservableArrayList
-import com.allforone.bean.BannerBean
-import com.allforone.core.vm.BaseViewModel
+import mvvm.core.BaseViewModel
 import com.allforone.ui.simplelist.SimpleListAdapter
 import com.allforone.ui.simplelist.SimpleTestBean
 import kotlin.random.Random

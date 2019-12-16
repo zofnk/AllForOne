@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.allforone.R
 import com.allforone.ktx.activity
 import com.allforone.ktx.click
-import com.allforone.ktx.createViewModel
+import mvvm.ktx.createViewModel
 import com.allforone.ui.api.NetActivity
 import com.allforone.ui.click.ClickActivity
 import com.allforone.ui.image.ImageActivity

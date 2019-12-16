@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.allforone.R
-import com.allforone.core.common.BaseActivity
+import mvvm.core.BaseActivity
 import com.allforone.databinding.ActImageBinding
 import kotlinx.android.synthetic.main.act_image.*
 
@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.act_image.*
  * Email : zofnk@vip.qq.com.
  * Create Time :  2019-12-10. 10:27
  */
-class ImageActivity : BaseActivity<ActImageBinding,ImageViewModel>() {
+class ImageActivity : BaseActivity<ActImageBinding, ImageViewModel>() {
 
     companion object {
         fun start(ctx: Context) {

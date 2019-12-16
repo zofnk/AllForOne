@@ -1,0 +1,26 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.zofnk'
+group = 'com.gitee.zofnk'
+
+def config = rootProject.ext
+
+android {
+    compileSdkVersion config.compileSdk
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':common_core')
+
+    implementation config.androidx.extensions
+    implementation config.androidx.viewmodel
+    implementation config.androidx.livedata
+}

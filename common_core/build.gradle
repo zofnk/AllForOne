@@ -3,24 +3,14 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.dcendents.android-maven'
-version = '0.0.15'
 group = 'com.github.zofnk'
 group = 'com.gitee.zofnk'
 
+def config = rootProject.ext
+
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion config.compileSdk
 
-    def config = rootProject.ext
-
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 10
-        versionName "0.0.1"
-
-        consumerProguardFiles 'consumer-rules.pro'
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -32,7 +22,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    def config = rootProject.ext
 
     //kotlin
     implementation config.kotlin.kotlin

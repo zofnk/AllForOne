@@ -1,4 +1,4 @@
-package com.allforone.livedata
+package mvvm.livedata
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner

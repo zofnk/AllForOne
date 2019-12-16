@@ -21,6 +21,15 @@ ext {
 
     brvah = '2.9.48-androidx'
 
+    common = [
+            minSdk = 21,
+            targetSdk = 29,
+            compileSdk = 29,
+            buildTools = "29.0.2",
+            versionCode = 1,
+            versionName = "0.0.1"
+    ]
+
     kotlin = [
             coreKtx           : "androidx.core:core-ktx:$coreKtx",
             kotlin            : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -43,7 +52,7 @@ ext {
 
     utils = [
             hutool: "cn.hutool:hutool-all:$hutool",
-            log : "com.github.zhaokaiqiang.klog:library:1.6.0",
+            log   : "com.github.zhaokaiqiang.klog:library:1.6.0",
     ]
 
     net = [

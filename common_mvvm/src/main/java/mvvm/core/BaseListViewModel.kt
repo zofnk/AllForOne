@@ -1,4 +1,4 @@
-package com.allforone.core.vm
+package mvvm.core
 
 import android.app.Application
 

@@ -2,9 +2,12 @@ package com.allforone.ui.api
 
 import android.app.Application
 import com.allforone.bean.*
-import com.allforone.core.vm.BaseViewModel
+import mvvm.core.BaseViewModel
 import com.allforone.ktx.*
-import com.allforone.livedata.SingleLiveData
+import mvvm.ktx.createRequest
+import mvvm.ktx.injectLifecycle
+import mvvm.ktx.toast
+import mvvm.livedata.SingleLiveData
 import io.reactivex.Observable
 
 /**

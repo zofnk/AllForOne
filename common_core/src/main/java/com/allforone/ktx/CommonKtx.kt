@@ -1,12 +1,10 @@
 package com.allforone.ktx
 
-import android.app.Application
 import android.content.Context
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.AndroidViewModel
 import com.allforone.utils.DpUtil
 import com.allforone.utils.Toaster
 import com.allforone.utils.WindowsUtil
@@ -79,14 +77,6 @@ fun Fragment.toast(str: CharSequence) {
 
 fun Fragment.longToast(str: CharSequence) {
     ctx.longToast(str)
-}
-
-fun AndroidViewModel.toast(str: CharSequence) {
-    ctx.toast(str)
-}
-
-fun AndroidViewModel.toast(str: String) {
-    ctx.toast(str)
 }
 
 fun View.toast(str: CharSequence) {

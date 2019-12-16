@@ -1,7 +1,7 @@
 package com.allforone.ui.main
 
 import android.app.Application
-import com.allforone.core.vm.BaseViewModel
+import mvvm.core.BaseViewModel
 
 /**
  * Author : zofnk.

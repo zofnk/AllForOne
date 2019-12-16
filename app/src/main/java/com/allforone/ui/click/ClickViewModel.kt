@@ -1,9 +1,9 @@
 package com.allforone.ui.click
 
 import android.app.Application
-import com.allforone.core.vm.BaseViewModel
-import com.allforone.ktx.ctx
 import com.allforone.ktx.toast
+import mvvm.core.BaseViewModel
+import mvvm.ktx.ctx
 
 /**
  * Author : zofnk.

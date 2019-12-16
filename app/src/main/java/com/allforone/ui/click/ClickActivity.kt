@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.allforone.R
-import com.allforone.core.common.BaseActivity
+import mvvm.core.BaseActivity
 import com.allforone.databinding.ActClickBinding
 
 /**
