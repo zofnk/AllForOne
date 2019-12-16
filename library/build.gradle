@@ -3,6 +3,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.dcendents.android-maven'
+version = '0.0.15'
 group = 'com.github.zofnk'
 group = 'com.gitee.zofnk'
 
@@ -64,7 +65,7 @@ dependencies {
     //glide
     //可能需要用到部分api所以暴露出去
     api config.glide.glide
-    kapt  config.glide.glide_compiler
+    kapt config.glide.glide_compiler
 
     //涵盖不了全部方法,需要暴露  docs:https://www.hutool.cn/docs/
 //    api config.utils.hutool
