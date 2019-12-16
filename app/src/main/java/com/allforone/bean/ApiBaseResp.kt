@@ -1,6 +1,7 @@
 package com.allforone.bean
 
-import com.allforone.data.NetResponse
+import common.data.NetResponse
+
 
 /**
  * Author : zofnk.

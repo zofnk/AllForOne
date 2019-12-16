@@ -2,8 +2,8 @@ package com.allforone.http
 
 import android.content.Context
 import com.allforone.bean.newss
-import com.allforone.ktx.netAvailable
-import com.allforone.ktx.toast
+import common.ktx.netAvailable
+import common.ktx.toast
 import io.reactivex.observers.DisposableObserver
 
 /**
@@ -21,7 +21,7 @@ class NetSubscribe {
             subscriber: DisposableObserver<newss>
         ) {
             if (context.netAvailable) {
-                RetrofitFactory.getInstance().apply {
+                common.http.RetrofitFactory.getInstance().apply {
                     toSubscribe(create(NetApi::class.java).getNews(type, key), subscriber)
                 }
             } else {
@@ -36,7 +36,7 @@ class NetSubscribe {
             subscriber: DisposableObserver<newss>
         ) {
             if (context.netAvailable) {
-                RetrofitFactory.getInstance().apply {
+                common.http.RetrofitFactory.getInstance().apply {
                     toSubscribe(create(NetApi::class.java).postNews(type, key), subscriber)
                 }
             } else {

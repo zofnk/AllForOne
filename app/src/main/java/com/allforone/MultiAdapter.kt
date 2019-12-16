@@ -1,8 +1,8 @@
 package com.allforone
 
-import com.allforone.core.adapter.QuickBindingMultiAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.chad.library.adapter.base.entity.MultiItemEntity
+import common.core.adapter.QuickBindingMultiAdapter
 
 /**
  * Author : zofnk.

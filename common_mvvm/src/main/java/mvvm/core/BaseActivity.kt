@@ -2,7 +2,7 @@ package mvvm.core
 
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
-import com.allforone.core.common.CommonActivity
+import common.core.common.CommonActivity
 import mvvm.ktx.createDataBinding
 import mvvm.ktx.createViewModel
 import java.lang.reflect.ParameterizedType

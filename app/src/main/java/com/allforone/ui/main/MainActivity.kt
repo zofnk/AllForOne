@@ -3,13 +3,13 @@ package com.allforone.ui.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.allforone.R
-import com.allforone.ktx.activity
-import com.allforone.ktx.click
 import mvvm.ktx.createViewModel
 import com.allforone.ui.api.NetActivity
 import com.allforone.ui.click.ClickActivity
 import com.allforone.ui.image.ImageActivity
 import com.allforone.ui.simplelist.ListActivity
+import common.ktx.activity
+import common.ktx.click
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**

@@ -3,7 +3,7 @@ package mvvm.ktx
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
-import com.allforone.ktx.toast
+import common.ktx.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext

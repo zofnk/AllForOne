@@ -1,10 +1,10 @@
 package com.allforone.ui.api
 
-import com.allforone.core.repo.BaseRepository
 import com.allforone.http.BASE_URL_JUHE
 import com.allforone.http.createApi
-import com.allforone.ktx.responseTransformer
-import com.allforone.ktx.scheduleTransformer
+import common.core.repo.BaseRepository
+import common.ktx.responseTransformer
+import common.ktx.scheduleTransformer
 
 /**
  * Author : zofnk.

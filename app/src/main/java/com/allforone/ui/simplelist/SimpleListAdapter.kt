@@ -1,9 +1,9 @@
 package com.allforone.ui.simplelist
 
 import com.allforone.R
-import com.allforone.core.adapter.QuickBindingAdapter
-import com.allforone.core.viewholder.BaseBindingViewHolder
 import com.allforone.databinding.ItemBindingTextBinding
+import common.core.adapter.QuickBindingAdapter
+import common.core.viewholder.BaseBindingViewHolder
 
 /**
  * Author : zofnk.

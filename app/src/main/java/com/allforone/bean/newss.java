@@ -1,7 +1,5 @@
 package com.allforone.bean;
 
-import com.allforone.data.NetResponse;
-
 import java.util.List;
 
 /**

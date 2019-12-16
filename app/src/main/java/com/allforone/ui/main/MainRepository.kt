@@ -1,6 +1,6 @@
 package com.allforone.ui.main
 
-import com.allforone.core.repo.BaseRepository
+import common.core.repo.BaseRepository
 
 /**
  * Author : zofnk.

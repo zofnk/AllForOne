@@ -1,10 +1,10 @@
 package com.allforone.ui.image
 
 import com.allforone.R
-import com.allforone.core.adapter.QuickBindingAdapter
-import com.allforone.core.viewholder.BaseBindingViewHolder
 import com.allforone.databinding.ItemImageBinding
-import com.allforone.ktx.load
+import common.core.adapter.QuickBindingAdapter
+import common.core.viewholder.BaseBindingViewHolder
+import common.ktx.load
 
 /**
  * Author : zofnk.

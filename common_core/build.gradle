@@ -11,6 +11,10 @@ def config = rootProject.ext
 android {
     compileSdkVersion config.compileSdk
 
+    defaultConfig {
+        minSdkVersion config.minSdk
+        targetSdkVersion config.targetSdk
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
