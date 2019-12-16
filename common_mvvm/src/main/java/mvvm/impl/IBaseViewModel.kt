@@ -13,24 +13,23 @@ import androidx.lifecycle.OnLifecycleEvent
 interface IBaseViewModel : LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
-    abstract fun onAny(owner: LifecycleOwner, event: Lifecycle.Event)
+    fun onAny(owner: LifecycleOwner, event: Lifecycle.Event)
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    abstract fun onCreate()
+    fun onCreate()
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    abstract fun onDestroy()
+    fun onDestroy()
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    abstract fun onStart()
+    fun onStart()
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    abstract fun onStop()
+    fun onStop()
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    abstract fun onResume()
+    fun onResume()
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    abstract fun onPause()
-
+    fun onPause()
 }

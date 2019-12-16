@@ -36,25 +36,4 @@ abstract class BaseViewModel(app: Application) : AndroidViewModel(app), IBaseVie
         super.onCleared()
         compositeDisposable.clear()
     }
-
-    override fun onAny(owner: LifecycleOwner, event: Lifecycle.Event) {
-    }
-
-    override fun onCreate() {
-    }
-
-    override fun onDestroy() {
-    }
-
-    override fun onStart() {
-    }
-
-    override fun onStop() {
-    }
-
-    override fun onResume() {
-    }
-
-    override fun onPause() {
-    }
 }
