@@ -15,7 +15,7 @@ import java.lang.ref.WeakReference
  * Email : zofnk@vip.qq.com.
  * Creat Time :  11.21. 22:47
  */
-abstract class BaseViewModel(app: Application) : AndroidViewModel(app), IBaseViewModel {
+open class BaseViewModel(app: Application) : AndroidViewModel(app), IBaseViewModel {
 
     //弱引用持有
     private var lifecycle: WeakReference<LifecycleProvider<*>>? = null
@@ -27,7 +27,6 @@ abstract class BaseViewModel(app: Application) : AndroidViewModel(app), IBaseVie
 
     val lifecycleProvider get() = lifecycle?.get()
 
-
     fun addDisposables(disposable: Disposable) {
         compositeDisposable.add(disposable)
     }
@@ -36,4 +35,18 @@ abstract class BaseViewModel(app: Application) : AndroidViewModel(app), IBaseVie
         super.onCleared()
         compositeDisposable.clear()
     }
+
+    override fun onAny(owner: LifecycleOwner, event: Lifecycle.Event) {}
+
+    override fun onCreate() {}
+
+    override fun onDestroy() {}
+
+    override fun onStart() {}
+
+    override fun onStop() {}
+
+    override fun onResume() {}
+
+    override fun onPause() {}
 }
