@@ -8,6 +8,7 @@ import com.allforone.R
 import com.allforone.core.common.BaseActivity
 import com.allforone.databinding.ActNetBinding
 import com.allforone.ktx.click
+import com.demo.dokong.componentmvvm.core.hh
 import com.lxj.xpopup.XPopup
 import kotlinx.android.synthetic.main.act_net.*
 
@@ -31,6 +32,8 @@ class NetActivity : BaseActivity<ActNetBinding, NetViewModel>() {
 
         val pop = XPopup.Builder(this)
 
+        val aa =1
+        val bb = aa hh 1
         viewModel.resultTask.observe(this, Observer {
             pop.asConfirm("result", it, null)
                 .show()
