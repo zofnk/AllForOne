@@ -1,0 +1,90 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.zofnk'
+group = 'com.gitee.zofnk'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    def config = rootProject.ext
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 10
+        versionName "0.0.1"
+
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def config = rootProject.ext
+
+    //kotlin
+    implementation config.kotlin.kotlin
+    implementation config.kotlin.coreKtx
+
+    //coroutines
+    implementation config.kotlin.coroutines_core
+    implementation config.kotlin.coroutines_android
+    implementation config.kotlin.reflect
+
+    //android 控件需要开放
+    kapt config.androidx.databinding
+    api config.androidx.material
+    api config.androidx.appcompat
+    api config.androidx.constraintlayout
+    api config.androidx.recyclerview
+
+    //jetpack
+    implementation config.androidx.extensions
+    implementation config.androidx.viewmodel
+    implementation config.androidx.livedata
+
+    //retrofit
+    api 'com.squareup.okhttp3:okhttp:4.2.2'
+    api(config.net.retrofit) {
+        transitive = false
+    }
+    api config.net.gson_converter
+
+    //glide
+    //可能需要用到部分api所以暴露出去
+    api config.glide.glide
+    kapt  config.glide.glide_compiler
+
+    //涵盖不了全部方法,需要暴露  docs:https://www.hutool.cn/docs/
+//    api config.utils.hutool
+    implementation config.utils.log
+
+    //BRVAH
+    api config.recyclerview.brvah
+
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'io.reactivex.rxjava3:rxjava:3.0.0-RC6'
+    //配合Rxjava 使用
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    // 日志
+    api 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+
+    api 'com.trello.rxlifecycle3:rxlifecycle:3.1.0'
+    api 'com.trello.rxlifecycle3:rxlifecycle-components:3.1.0'
+
+    implementation('com.github.bumptech.glide:okhttp3-integration:4.10.0') {
+        transitive = false
+    }
+    kapt 'com.github.bumptech.glide:okhttp3-integration:4.10.0'
+}
