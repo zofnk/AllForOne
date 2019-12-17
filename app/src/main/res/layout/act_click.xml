@@ -37,7 +37,6 @@
             app:view_longClick="@{() -> vm.valueLonClick(vm.funValue)}" />
 
         <TextView
-            android:id="@+id/tvTimeCountDown"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
@@ -49,6 +48,20 @@
             android:textColor="@android:color/white"
             android:textSize="16sp"
             app:view_click="@{() -> vm.onCountDownClick()}"
+            tools:text="60秒" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_time_count_down"
+            android:enabled="@{vm.viewEnabledRx}"
+            android:gravity="center"
+            android:text="@{vm.countDownStrRx}"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:view_click="@{() -> vm.onCountDownClickWithRxJava()}"
             tools:text="60秒" />
     </LinearLayout>
 </layout>

@@ -56,6 +56,7 @@ class NetRepository : BaseRepository() {
         token: String = ""
     ) = api
         .searchAnimation2(key, page, size, token)
+        .responseTransformer()
 
 
     fun getNews(

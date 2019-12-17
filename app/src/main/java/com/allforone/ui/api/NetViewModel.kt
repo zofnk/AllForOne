@@ -27,7 +27,6 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
             .compose(injectLifecycle())
             .responseSubscribe {
 
-
                 onSuccess = {
                     resultTask.postValue(it.List[0].Name)
                 }
@@ -37,7 +36,6 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
                 }
             }
     }
-
 
     //kotlin基本请求
     @ExperimentalCoroutinesApi
@@ -51,9 +49,7 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
 
             onRequest = {
                 Thread.currentThread().name.logE("onRequest Thread : ")
-                mainRepo
-                    .searchAnimation2(key = "一")
-                    .responseTransformer()
+                mainRepo.searchAnimation2(key = "一")
             }
 
             onSuccess = {
@@ -125,9 +121,7 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
             onRequest = {
                 val bean = mainRepo.getBanner(type = 1, area = 9)
                 sb.append(bean.List[0].Title + '\n')
-                mainRepo
-                    .searchAnimation2("一")
-                    .responseTransformer()
+                mainRepo.searchAnimation2("一")
             }
 
             onSuccess = {

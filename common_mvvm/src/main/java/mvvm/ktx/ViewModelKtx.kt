@@ -1,10 +1,14 @@
 package mvvm.ktx
 
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import common.http.ApiException
 import common.http.ExceptionHandle
 import common.http.function.CoroutineResponseHandler
+import common.ktx.errorHandler
 import common.ktx.exceptionTransformer
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
@@ -19,14 +23,19 @@ import kotlinx.coroutines.launch
 
 fun <T> BaseViewModel.injectLifecycle() = lifecycleProvider?.bindToLifecycle<T>()
 
-//普通封装
+//在ViewModel中启动协程域
+fun ViewModel.launchUI(func: suspend CoroutineScope.() -> Unit) {
+    viewModelScope.launch { func() }
+}
+
+//普通的请求方式封装
 fun <T> AndroidViewModel.createRequest(func: CoroutineResponseHandler<T>.() -> Unit) {
     val responseHandler = CoroutineResponseHandler<T>()
         .apply {
             func()
         }
 
-    viewModelScope.launch {
+    launchUI {
         scheduleMain {
             responseHandler.onStart?.invoke()
         }
@@ -39,24 +48,23 @@ fun <T> AndroidViewModel.createRequest(func: CoroutineResponseHandler<T>.() -> U
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            val ex = ExceptionHandle.handleException(e)
-            responseHandler.onError?.invoke(ex.exceptionTransformer())
+            responseHandler.onError?.invoke(e.errorHandler())
         } finally {
             responseHandler.onComplete?.invoke()
         }
     }
 }
 
-//Flow封装
+//Flow流封装请求
 @ExperimentalCoroutinesApi
 fun <T> AndroidViewModel.flowRequest(func: CoroutineResponseHandler<T>.() -> Unit) {
     val responseHandler = CoroutineResponseHandler<T>()
         .apply {
             func()
         }
-    viewModelScope.launch {
-        flow {
-            emit(responseHandler.onRequest?.invoke())
+    launchUI {
+        emitFlow {
+            responseHandler.onRequest?.invoke()
         }
             .flowOn(Dispatchers.IO)
             .onStart {
@@ -67,8 +75,7 @@ fun <T> AndroidViewModel.flowRequest(func: CoroutineResponseHandler<T>.() -> Uni
             }
             .catch {
                 it.printStackTrace()
-                val ex = ExceptionHandle.handleException(it)
-                responseHandler.onError?.invoke(ex.exceptionTransformer())
+                responseHandler.onError?.invoke(it.errorHandler())
             }
             .collect {
                 responseHandler.onSuccess?.invoke(it!!)
