@@ -12,58 +12,58 @@ private enum class Level {
     V, D, I, W, E
 }
 
-fun Any.logV(tag: String = CommonConfig.defaultTagLog, msg: String) {
+fun Any?.logV(msg: String?, tag: String = CommonConfig.defaultTagLog) {
     intervalLog(Level.V, tag, msg)
 }
 
-fun Any.logD(tag: String = CommonConfig.defaultTagLog, msg: String) {
+fun Any?.logD(msg: String?, tag: String = CommonConfig.defaultTagLog) {
     intervalLog(Level.D, tag, msg)
 }
 
-fun Any.logI(tag: String = CommonConfig.defaultTagLog, msg: String) {
+fun Any?.logI(msg: String?, tag: String = CommonConfig.defaultTagLog) {
     intervalLog(Level.I, tag, msg)
 }
 
-fun Any.logW(tag: String = CommonConfig.defaultTagLog, msg: String) {
+fun Any?.logW(msg: String?, tag: String = CommonConfig.defaultTagLog) {
     intervalLog(Level.W, tag, msg)
 }
 
-fun Any.logE(tag: String = CommonConfig.defaultTagLog, msg: String) {
+fun Any?.logE(msg: String?, tag: String = CommonConfig.defaultTagLog) {
     intervalLog(Level.E, tag, msg)
 }
 
-fun String.logV(tag: String = CommonConfig.defaultTagLog) {
-    logV(tag, this)
+fun String?.logV(prefix: String = "") {
+    logV(tag = CommonConfig.defaultTagLog, msg = "$prefix$this")
 }
 
-fun String.logD(tag: String = CommonConfig.defaultTagLog) {
-    logD(tag, this)
+fun String?.logD(prefix: String = "") {
+    logD(tag = CommonConfig.defaultTagLog, msg = "$prefix$this")
 }
 
-fun String.logI(tag: String = CommonConfig.defaultTagLog) {
-    logI(tag, this)
+fun String?.logI(prefix: String = "") {
+    logI(tag = CommonConfig.defaultTagLog, msg = "$prefix$this")
 }
 
-fun String.logW(tag: String = CommonConfig.defaultTagLog) {
-    logW(tag, this)
+fun String?.logW(prefix: String = "") {
+    logW(tag = CommonConfig.defaultTagLog, msg = "$prefix$this")
 }
 
-fun String.logE(tag: String = CommonConfig.defaultTagLog) {
-    logE(tag, this)
+fun String?.logE(prefix: String = "") {
+    logE(tag = CommonConfig.defaultTagLog, msg = "$prefix$this")
 }
 
 fun Throwable?.printTrace() {
     if (CommonConfig.debug) this?.printStackTrace()
 }
 
-private fun intervalLog(level: Level, tag: String, msg: String) {
+private fun intervalLog(level: Level, tag: String, msg: String?) {
     if (CommonConfig.debug) {
         when (level) {
-            Level.V -> KLog.v(tag, msg)
-            Level.D -> KLog.d(tag, msg)
-            Level.I -> KLog.i(tag, msg)
-            Level.W -> KLog.w(tag, msg)
-            Level.E -> KLog.e(tag, msg)
+            Level.V -> KLog.v(tag, msg ?: "")
+            Level.D -> KLog.d(tag, msg ?: "")
+            Level.I -> KLog.i(tag, msg ?: "")
+            Level.W -> KLog.w(tag, msg ?: "")
+            Level.E -> KLog.e(tag, msg ?: "")
         }
     }
 }

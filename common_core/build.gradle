@@ -3,6 +3,8 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'android-aspectjx'
+
 group = 'com.github.zofnk'
 group = 'com.gitee.zofnk'
 
@@ -81,4 +83,5 @@ dependencies {
         transitive = false
     }
     kapt 'com.github.bumptech.glide:okhttp3-integration:4.10.0'
+    api 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.5x'
 }

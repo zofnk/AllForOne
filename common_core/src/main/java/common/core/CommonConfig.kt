@@ -14,7 +14,7 @@ object CommonConfig {
 
     lateinit var context: Context
     var debug: Boolean = BuildConfig.DEBUG
-    var defaultTagLog = "All4One"
+    var defaultTagLog = "Alkaid"
 
     fun init(
         ctx: Context,
