@@ -11,7 +11,6 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import mvvm.core.BaseViewModel
 import mvvm.ktx.*
@@ -53,14 +52,14 @@ class ClickViewModel(app: Application) : BaseViewModel(app) {
     fun onCountDownClick() {
         launchUI {
             scheduleMain {
-                emitFlow { netRepo.searchAnimation2(key = "一") }
-                    .flatMapConcat {
-                        flow {
-                            (5 downTo 1).forEach {
-                                emit("${it}秒")
-                                delay(1000)
-                            }
-                        }
+                emitFlow {
+                    netRepo.searchAnimation2(key = "一")
+                }
+                    .flatMapMerge {
+                        (4 downTo 0)
+                            .asFlow()
+                            .map { "${it}秒" }
+                            .delayEach(1000)
                     }
                     .flowOn(Dispatchers.IO)
                     .onStart {

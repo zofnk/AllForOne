@@ -9,6 +9,7 @@ import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import java.util.concurrent.ExecutionException
 import javax.net.ssl.SSLException
 
 /**
@@ -32,6 +33,7 @@ object ExceptionHandle {
     private const val TIMEOUT_ERROR = 1004
     private const val UNKNOWN = 1005
     private const val RESPONSE = 888
+    private const val GLIDE = 666
 
     fun handleException(e: Throwable): ApiException {
         return when (e) {
@@ -54,6 +56,7 @@ object ExceptionHandle {
             is ConnectTimeoutException, is SocketTimeoutException -> ApiException(e, TIMEOUT_ERROR, "连接超时")
             is UnknownHostException -> ApiException(e, TIMEOUT_ERROR, "未知主机地址")
             is ResponseException -> ApiException(e, RESPONSE, e.msg)
+            is ExecutionException -> ApiException(e ,GLIDE , e.message?:"")
             else -> ApiException(e, UNKNOWN, "未知错误")
         }
     }

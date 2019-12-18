@@ -3,6 +3,7 @@ package com.allforone.ui.api
 import com.allforone.http.BASE_URL_JUHE
 import com.allforone.http.createApi
 import common.core.repo.BaseRepository
+import common.ktx.logE
 import common.ktx.responseTransformer
 import common.ktx.scheduleTransformer
 

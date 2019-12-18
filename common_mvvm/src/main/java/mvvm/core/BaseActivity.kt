@@ -19,15 +19,27 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : CommonActi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        createBinding()
+        createVM()
+        onCreated(savedInstanceState)
+    }
+
+    private fun createBinding() {
         layoutBinding = createDataBinding(bindLayoutId())
         setContentView(layoutBinding.root)
+    }
 
+    @Suppress("UNCHECKED_CAST")
+    private fun createVM() {
         val type = javaClass.genericSuperclass
-        val modelClass = ((type as ParameterizedType).actualTypeArguments)[1] as Class<V>
-        viewModel = createViewModel(modelClass)
+        if (type is ParameterizedType) {
+            val tp = type.actualTypeArguments[1]
+            val tClass = tp as Class<V>
+            viewModel = createViewModel(tClass)
+        }
+
+        //为ViewModel注入生命周期感知
         lifecycle.addObserver(viewModel)
         viewModel.injectLifecycleProvider(this)
-
-        onCreated(savedInstanceState)
     }
 }

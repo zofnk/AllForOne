@@ -1,11 +1,25 @@
 package com.allforone.ui.api
 
+import android.R
 import android.app.Application
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import androidx.core.content.ContextCompat
 import com.allforone.bean.SearchBean
 import com.allforone.bean.SearchListBean
-import common.ktx.*
+import com.bumptech.glide.request.target.Target
+import common.http.GlideApp
+import common.ktx.handleError
+import common.ktx.handleNext
+import common.ktx.logE
+import common.ktx.responseSubscribe
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
 import mvvm.core.BaseViewModel
 import mvvm.ktx.*
 import mvvm.livedata.SingleLiveData
@@ -18,6 +32,7 @@ import mvvm.livedata.SingleLiveData
 class NetViewModel(app: Application) : BaseViewModel(app) {
 
     val resultTask = SingleLiveData<String>()
+    val imageTask = SingleLiveData<Drawable>()
     private val mainRepo by lazy { NetRepository() }
 
     //rx基本请求
@@ -28,6 +43,9 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
             .responseSubscribe {
 
                 onSuccess = {
+
+                    Thread.currentThread()
+                        .name.logE("rx onComplete Thread id : ${Thread.currentThread().id}  name : ")
                     resultTask.postValue(it.List[0].Name)
                 }
 
@@ -41,47 +59,37 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
     @ExperimentalCoroutinesApi
     fun loadDataWithKotlin() {
 
-        flowRequest<SearchListBean<SearchBean>> {
+        createRequest<SearchListBean<SearchBean>> {
 
             onStart = {
-                Thread.currentThread().name.logE("onStart Thread : ")
+                Thread.currentThread()
+                    .name.logE("kt onStart Thread id : ${Thread.currentThread().id}  name : ")
             }
 
             onRequest = {
-                Thread.currentThread().name.logE("onRequest Thread : ")
+                Thread.currentThread()
+                    .name.logE("kt onRequest Thread id : ${Thread.currentThread().id}  name : ")
                 mainRepo.searchAnimation2(key = "一")
             }
 
             onSuccess = {
-                Thread.currentThread().name.logE("onSuccess Thread : ")
+                Thread.currentThread()
+                    .name.logE("kt onSuccess Thread id : ${Thread.currentThread().id}  name : ")
                 resultTask.postValue(it.List[0].Name)
             }
 
             onError = {
-                Thread.currentThread().name.logE("onError Thread : ")
+                Thread.currentThread()
+                    .name.logE("kt onError Thread id : ${Thread.currentThread().id}  name : ")
                 it.msg.logE()
                 toast(it.msg)
             }
 
             onComplete = {
-                Thread.currentThread().name.logE("onComplete Thread : ")
+                Thread.currentThread()
+                    .name.logE("kt onComplete Thread id : ${Thread.currentThread().id}  name : ")
             }
         }
-
-        /*createRequest<SearchListBean<SearchBean>> {
-
-            onRequest = {
-                mainRepo.searchAnimation2(key = "一")
-            }
-
-            onSuccess = {
-                resultTask.postValue(it.List[0].Name)
-            }
-
-            onError = {
-                toast(it.msg)
-            }
-        }*/
     }
 
     //rx嵌套请求
@@ -166,6 +174,67 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
                     resultTask.postValue(sb.toString())
                 }
             }
+    }
+
+    val ims = listOf(
+        "http://img3.imgtn.bdimg.com/it/u=3543839312,2262585839&fm=26&gp=0.jpg",
+        "http://img3.imgtn.bdimg.com/it/u=3543839312,2262585839&fm=26&gp=0.jpg",
+        "httpimg3",
+        "httpimg3",
+        "http://img3.imgtn.bdimg.com/it/u=3543839312,2262585839&fm=26&gp=0.jpg",
+        "http://img3.imgtn.bdimg.com/it/u=3543839312,2262585839&fm=26&gp=0.jpg"
+    )
+
+    @FlowPreview
+    @ExperimentalCoroutinesApi
+    fun downloadImage() {
+        launchUI {
+            scheduleMain {
+                flow {
+                    ims.forEach { emit(it) }
+                }
+                    .flatMapConcat {
+                        emitFlow {
+                            GlideApp.with(ctx)
+                                .load(it)
+                                .submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                                .get()
+                        }
+                            .catch {
+                                emit(ColorDrawable(ContextCompat.getColor(ctx, R.color.white)))
+                            }
+                    }
+                    .flowOn(Dispatchers.IO)
+                    .onStart { "开始下载图片".logE() }
+                    .onCompletion { "图片下载结束".logE() }
+                    .collect { it.toString().logE("下载成功") }
+            }
+        }
+
+        Observable
+            .fromIterable(ims)
+            .flatMap {
+                Observable
+                    .just(it)
+                    .map { url ->
+                        GlideApp.with(ctx)
+                            .load(url)
+                            .submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                            .get()
+                    }
+                    .onErrorReturnItem(ColorDrawable(ContextCompat.getColor(ctx, R.color.white)))
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .responseSubscribe {
+
+                onStart = { "开始下载图片".logE() }
+
+                onSuccess = { it.toString().logE("下载成功") }
+
+                onComplete = { "图片下载结束".logE() }
+            }
+
 
     }
 }

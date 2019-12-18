@@ -30,11 +30,12 @@ fun <T> emitFlow(/*ctx: CoroutineContext = Dispatchers.IO,*/ func: suspend () ->
     }
 //        .flowOn(ctx)
 
-//代替flow.catch{}
+/**
+ * 代替flow.catch{}
+ */
 @ExperimentalCoroutinesApi
-fun <T> Flow<T>.onError(func: (ApiException) -> Unit): Flow<T> {
-    return catch {
+fun <T> Flow<T>.onError(func: (ApiException) -> Unit): Flow<T> =
+    catch {
         it.printStackTrace()
         func.invoke(it.errorHandler())
     }
-}

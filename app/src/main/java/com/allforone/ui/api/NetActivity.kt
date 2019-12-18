@@ -8,6 +8,7 @@ import com.allforone.R
 import mvvm.core.BaseActivity
 import com.allforone.databinding.ActNetBinding
 import com.lxj.xpopup.XPopup
+import kotlinx.android.synthetic.main.act_net.*
 
 /**
  * Author : zofnk.
@@ -32,6 +33,9 @@ class NetActivity : BaseActivity<ActNetBinding, NetViewModel>() {
         viewModel.resultTask.observe(this, Observer {
             pop.asConfirm("result", it, null)
                 .show()
+        })
+        viewModel.imageTask.observe(this, Observer {
+            ivImage.setImageDrawable(it)
         })
     }
 }
