@@ -25,7 +25,7 @@ import okhttp3.OkHttpClient;
  * Email : zofnk@vip.qq.com.
  * Create Time :  2019-12-10. 13:24
  */
-@GlideModule
+//@GlideModule
 public class OkHttp3GlideModule extends AppGlideModule {
 
     @Override

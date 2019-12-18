@@ -1,7 +1,7 @@
 package com.mvp.core
 
 import android.os.Bundle
-import com.allforone.core.common.CommonActivity
+import common.core.common.CommonActivity
 
 /**
  * Author : zofnk.

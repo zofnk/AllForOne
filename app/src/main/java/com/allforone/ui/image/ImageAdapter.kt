@@ -4,7 +4,10 @@ import com.allforone.R
 import com.allforone.databinding.ItemImageBinding
 import common.core.adapter.QuickBindingAdapter
 import common.core.viewholder.BaseBindingViewHolder
-import common.ktx.load
+import common.ktx.gone
+import common.ktx.loadProgress
+import common.ktx.logE
+
 
 /**
  * Author : zofnk.
@@ -14,6 +17,26 @@ import common.ktx.load
 class ImageAdapter : QuickBindingAdapter<String, ItemImageBinding>(R.layout.item_image) {
 
     override fun convert(hepler: BaseBindingViewHolder<ItemImageBinding>, item: String) {
-        hepler.viewBinding.ivImage.load(url = item)
+        hepler.viewBinding.apply {
+            ivImage.loadProgress(item) {
+
+                loadProgress = { current, total, progress ->
+                    "current -> $current , total -> $total , progress -> $progress".logE()
+                    tvMask.text = "$progress %"
+                }
+
+                loadFailed = {
+                    "loadFailed".logE()
+                    tvMask.gone()
+                }
+
+                loadReady = {
+                    "loadReady".logE()
+                    tvMask.gone()
+                }
+
+                executePendingBindings()
+            }
+        }
     }
 }

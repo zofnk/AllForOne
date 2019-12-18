@@ -7,6 +7,9 @@ import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import com.allforone.bean.SearchBean
 import com.allforone.bean.SearchListBean
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import common.http.GlideApp
 import common.ktx.handleError
@@ -188,6 +191,8 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
     @FlowPreview
     @ExperimentalCoroutinesApi
     fun downloadImage() {
+
+        //Kotlin实现方式
         launchUI {
             scheduleMain {
                 flow {
@@ -211,8 +216,9 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
             }
         }
 
-        Observable
-            .fromIterable(ims)
+        //RxJava实现方式
+        /*Observable
+                .fromIterable(ims)
             .flatMap {
                 Observable
                     .just(it)
@@ -233,7 +239,7 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
                 onSuccess = { it.toString().logE("下载成功") }
 
                 onComplete = { "图片下载结束".logE() }
-            }
+            }*/
 
 
     }
