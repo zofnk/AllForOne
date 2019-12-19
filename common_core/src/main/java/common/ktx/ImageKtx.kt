@@ -1,7 +1,12 @@
 package common.ktx
 
+import android.app.Application
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
+import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -11,10 +16,12 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import common.core.CommonConfig.context
 import common.http.GlideApp
 import common.http.GlideRequest
 import common.http.ProgressAppGlideModule
 import common.http.listener.ImageLoadHandler
+import common.http.listener.ImageProgress
 
 /**
  * Author : zofnk.
@@ -30,7 +37,8 @@ fun ImageView.load(
     roundRadius: Int = 0,
     isCrossFade: Boolean = false,
     isOriginalSize: Boolean = false,
-    isBitmap: Boolean = false
+    isBitmap: Boolean = false,
+    thumbSize: Float = 1f
 ) {
     val options = RequestOptions().placeholder(placeholder).error(error).apply {
         if (isCenterCrop && scaleType != ImageView.ScaleType.CENTER_CROP)
@@ -58,13 +66,16 @@ fun ImageView.load(
     if (isBitmap) {
         GlideApp.with(context)
             .asBitmap()
+            .priority(Priority.LOW)
             .load(url)
+            .thumbnail(thumbSize)
             .apply(options)
             .into(this)
     } else {
         GlideApp.with(context)
             .load(url)
             .apply(options)
+            .thumbnail(thumbSize)
             .apply { if (isCrossFade) transition(DrawableTransitionOptions.withCrossFade()) }
             .into(this)
     }
@@ -75,6 +86,17 @@ fun ImageView.loadThumbnail(
     url: Any?
 ): GlideRequest<Drawable> {
     return GlideApp.with(ctx).load(url)
+}
+
+fun AndroidViewModel.submitImage(
+    url: Any?,
+    width: Int = Target.SIZE_ORIGINAL,
+    height: Int = Target.SIZE_ORIGINAL
+): Drawable {
+    return GlideApp.with(getApplication<Application>().applicationContext)
+        .load(url)
+        .submit(width, height)
+        .get()
 }
 
 /**
@@ -93,13 +115,15 @@ fun ImageView.loadProgress(
             block()
         }
 
+    val prog = ImageProgress()
+
     ProgressAppGlideModule.expect(url, object : ProgressAppGlideModule.UIonProgressListener {
         override fun onProgress(bytesRead: Long, expectedLength: Long) {
-            handler.loadProgress?.invoke(
-                bytesRead,
-                expectedLength,
-                (100 * bytesRead / expectedLength).toInt()
-            )
+            handler.loadProgress?.invoke(prog.apply {
+                current = bytesRead
+                total = expectedLength
+                progress = (100 * bytesRead / expectedLength).toInt()
+            })
         }
 
         override fun getGranualityPercentage(): Float = 1.0f
@@ -107,6 +131,7 @@ fun ImageView.loadProgress(
 
     GlideApp.with(ctx)
         .load(url)
+        .thumbnail(0.5f)
         .transition(DrawableTransitionOptions.withCrossFade())
         .listener(object : RequestListener<Drawable> {
             override fun onLoadFailed(
@@ -133,5 +158,4 @@ fun ImageView.loadProgress(
             }
         })
         .into(this)
-
 }

@@ -5,6 +5,7 @@ import com.allforone.databinding.ItemImageBinding
 import common.core.adapter.QuickBindingAdapter
 import common.core.viewholder.BaseBindingViewHolder
 import common.ktx.gone
+import common.ktx.load
 import common.ktx.loadProgress
 import common.ktx.logE
 
@@ -20,9 +21,9 @@ class ImageAdapter : QuickBindingAdapter<String, ItemImageBinding>(R.layout.item
         hepler.viewBinding.apply {
             ivImage.loadProgress(item) {
 
-                loadProgress = { current, total, progress ->
-                    "current -> $current , total -> $total , progress -> $progress".logE()
-                    tvMask.text = "$progress %"
+                loadProgress = {
+                    "current -> ${it.current} , total -> ${it.total} , progress -> ${it.progress}".logE()
+                    tvMask.text = "${it.progress}%"
                 }
 
                 loadFailed = {

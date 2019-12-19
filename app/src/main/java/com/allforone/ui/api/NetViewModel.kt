@@ -7,18 +7,8 @@ import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import com.allforone.bean.SearchBean
 import com.allforone.bean.SearchListBean
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
-import common.http.GlideApp
-import common.ktx.handleError
-import common.ktx.handleNext
-import common.ktx.logE
-import common.ktx.responseSubscribe
+import common.ktx.*
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -199,12 +189,7 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
                     ims.forEach { emit(it) }
                 }
                     .flatMapConcat {
-                        emitFlow {
-                            GlideApp.with(ctx)
-                                .load(it)
-                                .submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                                .get()
-                        }
+                        emitFlow { submitImage(it) }
                             .catch {
                                 emit(ColorDrawable(ContextCompat.getColor(ctx, R.color.white)))
                             }

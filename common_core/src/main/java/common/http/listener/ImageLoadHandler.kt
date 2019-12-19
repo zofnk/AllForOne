@@ -6,7 +6,13 @@ package common.http.listener
  * Creat Time :  12.18. 22:30
  */
 class ImageLoadHandler {
-    var loadProgress: ((Long, Long, Int) -> Unit)? = null
+    var loadProgress: ((ImageProgress) -> Unit)? = null
     var loadFailed: (() -> Unit)? = null
     var loadReady: (() -> Unit)? = null
+}
+
+class ImageProgress {
+    var current: Long = 0L
+    var total: Long = 0L
+    var progress: Int = 0
 }
