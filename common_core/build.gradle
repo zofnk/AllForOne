@@ -84,4 +84,8 @@ dependencies {
     }
     kapt 'com.github.bumptech.glide:okhttp3-integration:4.10.0'
     api 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.5x'
+
+    api 'com.liulishuo.okdownload:okdownload:1.0.6'
+    api 'com.liulishuo.okdownload:sqlite:1.0.6'
+    api 'com.liulishuo.okdownload:ktx:1.0.6'
 }

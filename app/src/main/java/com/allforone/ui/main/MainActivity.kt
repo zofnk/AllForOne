@@ -6,6 +6,7 @@ import com.allforone.R
 import mvvm.ktx.createViewModel
 import com.allforone.ui.api.NetActivity
 import com.allforone.ui.click.ClickActivity
+import com.allforone.ui.download.DownLoadActivity
 import com.allforone.ui.image.ImageActivity
 import com.allforone.ui.simplelist.ListActivity
 import common.ktx.activity
@@ -33,5 +34,6 @@ class MainActivity : AppCompatActivity() {
         btnList.click { ListActivity.start(activity) }
         btnClick.click { ClickActivity.start(activity) }
         btnImage.click { ImageActivity.start(activity) }
+        btnFileDownLoad.click { DownLoadActivity.start(activity) }
     }
 }
