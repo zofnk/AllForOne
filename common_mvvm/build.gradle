@@ -24,7 +24,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':common_core')
 
-    api config.androidx.extensions
-    api config.androidx.viewmodel
-    api config.androidx.livedata
+    api config.jetpack.extensions
+    api config.jetpack.viewmodel
+    api config.jetpack.livedata
 }

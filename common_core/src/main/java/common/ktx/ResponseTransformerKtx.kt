@@ -3,7 +3,7 @@ package common.ktx
 import common.data.NetResponse
 import common.http.ApiException
 import common.http.ResponseException
-import common.http.ResponseHandle
+import common.http.ResponseHandler
 import common.http.function.HandleResponseObservable
 import common.http.function.NetExceptionObservable
 import io.reactivex.Observable
@@ -29,7 +29,7 @@ fun <T> Observable<T>.scheduleTransformer(): Observable<T> =
  */
 fun <T, R : NetResponse<T>> Observable<R>.responseTransformer(): Observable<T> =
     scheduleTransformer()
-        .map(ResponseHandle())
+        .map(ResponseHandler())
         .onErrorResumeNext(NetExceptionObservable())
 
 //实体类转换器
@@ -49,7 +49,7 @@ fun <T> schedulersTransformer(): ObservableTransformer<T, T> {
 fun <T : NetResponse<T>> responseTransformer(): ObservableTransformer<T, T> {
     return ObservableTransformer { upstream ->
         upstream
-            .map<T>(ResponseHandle())
+            .map<T>(ResponseHandler())
             .onErrorResumeNext(NetExceptionObservable())
     }
 }

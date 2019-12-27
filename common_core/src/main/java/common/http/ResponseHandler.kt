@@ -9,6 +9,6 @@ import io.reactivex.functions.Function
  * Email : zofnk@vip.qq.com.
  * Creat Time :  11.21. 23:42
  */
-class ResponseHandle<T> : Function<NetResponse<T>, T> {
+class ResponseHandler<T> : Function<NetResponse<T>, T> {
     override fun apply(t: NetResponse<T>): T = t.responseTransformer()
 }
