@@ -53,8 +53,7 @@ class FileAdapter : QuickBindingAdapter<FileBean, ItemFileBinding>(R.layout.item
                     val total = info.totalLength
                     val percent = offset.toFloat() / total.toFloat()
 
-                    percent.toString()
-                        .logE("getCurrentInfo offset : $offset , totalLength : $total , percent :")
+                    "getCurrentInfo offset : $offset , totalLength : $total , percent : $percent".logE()
 
                     tvStartProgress.text = offset.toString()
                     tvEndProgress.text = total.toString()
@@ -71,7 +70,6 @@ class FileAdapter : QuickBindingAdapter<FileBean, ItemFileBinding>(R.layout.item
                         btnStart.text = "取消"
                         task.tag = item.url
 
-                        var totalLength: Long = 0
                         task.enqueue4WithSpeed(
                             onTaskStart = {
                                 mContext.toast("开始下载")
@@ -96,14 +94,12 @@ class FileAdapter : QuickBindingAdapter<FileBean, ItemFileBinding>(R.layout.item
                                 speedCalculator.downloading(increase)
 
                                 val offset = dp.currentOffset
-                                val total = totalLength
-                                val percent = offset.toFloat() / total.toFloat()
+                                val totalLength = dp.totalOffset
+                                val percent = offset.toFloat() / totalLength.toFloat()
 
-
-                                percent.toString()
-                                    .logE("task offset : $offset , totalLength : $totalLength , percent : ")
+                                "task offset : $offset , totalLength : $totalLength , percent :  $percent".logE()
                                 tvStartProgress.text = offset.toString()
-                                tvEndProgress.text = total.toString()
+                                tvEndProgress.text = totalLength.toString()
                                 pgItem.progress = (percent * pgItem.max).toInt()
                             }
                         }

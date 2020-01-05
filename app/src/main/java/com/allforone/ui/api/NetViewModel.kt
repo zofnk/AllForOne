@@ -37,8 +37,7 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
 
                 onSuccess = {
 
-                    Thread.currentThread()
-                        .name.logE("rx onComplete Thread id : ${Thread.currentThread().id}  name : ")
+                    "rx onComplete Thread id : ${Thread.currentThread().id}  name : ${Thread.currentThread().name}".logE()
                     resultTask.postValue(it.List[0].Name)
                 }
 
@@ -55,32 +54,27 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
         createRequest<SearchListBean<SearchBean>> {
 
             onStart = {
-                Thread.currentThread()
-                    .name.logE("kt onStart Thread id : ${Thread.currentThread().id}  name : ")
+                "kt onStart Thread id : ${Thread.currentThread().id}  name : ${Thread.currentThread().name}".logE()
             }
 
             onRequest = {
-                Thread.currentThread()
-                    .name.logE("kt onRequest Thread id : ${Thread.currentThread().id}  name : ")
+                "kt onRequest Thread id : ${Thread.currentThread().id}  name : ${Thread.currentThread()}".logE()
                 mainRepo.searchAnimation2(key = "一")
             }
 
             onSuccess = {
-                Thread.currentThread()
-                    .name.logE("kt onSuccess Thread id : ${Thread.currentThread().id}  name : ")
+                "kt onSuccess Thread id : ${Thread.currentThread().id}  name : ${Thread.currentThread().name}".logE()
                 resultTask.postValue(it.List[0].Name)
             }
 
             onError = {
-                Thread.currentThread()
-                    .name.logE("kt onError Thread id : ${Thread.currentThread().id}  name : ")
+                "kt onError Thread id : ${Thread.currentThread().id}  name : ${Thread.currentThread().name}".logE()
                 it.msg.logE()
                 toast(it.msg)
             }
 
             onComplete = {
-                Thread.currentThread()
-                    .name.logE("kt onComplete Thread id : ${Thread.currentThread().id}  name : ")
+                "kt onComplete Thread id : ${Thread.currentThread().id}  name : ${Thread.currentThread().name}".logE()
             }
         }
     }
@@ -197,7 +191,7 @@ class NetViewModel(app: Application) : BaseViewModel(app) {
                     .flowOn(Dispatchers.IO)
                     .onStart { "开始下载图片".logE() }
                     .onCompletion { "图片下载结束".logE() }
-                    .collect { it.toString().logE("下载成功") }
+                    .collect { "下载成功 $it".logE() }
             }
         }
 

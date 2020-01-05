@@ -34,6 +34,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':common_core')
     implementation project(path: ':common_mvvm')
+    implementation project(path: ':common_download')
 
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'com.lxj:xpopup:1.8.10-x'

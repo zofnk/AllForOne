@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+group = 'com.github.zofnk'
+group = 'com.gitee.zofnk'
+
+def config = rootProject.ext
+android {
+    compileSdkVersion config.compileSdk
+
+    defaultConfig {
+        minSdkVersion config.minSdk
+        targetSdkVersion config.targetSdk
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api config.utils.okDownload
+    api config.utils.okDownload_sql
+    api config.utils.okDownload_ktx
+}

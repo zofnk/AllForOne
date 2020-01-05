@@ -81,8 +81,4 @@ dependencies {
     kapt config.glide.glide_integration
 
     api config.utils.aop
-
-    api config.utils.okDownload
-    api config.utils.okDownload_sql
-    api config.utils.okDownload_ktx
 }
