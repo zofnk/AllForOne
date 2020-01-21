@@ -1,9 +1,9 @@
 package mvvm.core
 
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import common.core.common.CommonActivity
-import mvvm.ktx.createDataBinding
 import mvvm.ktx.createViewModel
 import java.lang.reflect.ParameterizedType
 
@@ -14,32 +14,30 @@ import java.lang.reflect.ParameterizedType
  */
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : CommonActivity() {
 
-    lateinit var layoutBinding: T
-    lateinit var viewModel: V
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        createBinding()
-        createVM()
-        onCreated(savedInstanceState)
-    }
-
-    private fun createBinding() {
-        layoutBinding = createDataBinding(bindLayoutId())
-        setContentView(layoutBinding.root)
+    protected val layoutBinding: T by lazy {
+        DataBindingUtil.setContentView(this, bindLayoutId()) as T
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun createVM() {
+    protected val viewModel: V by lazy {
         val type = javaClass.genericSuperclass
-        if (type is ParameterizedType) {
-            val tp = type.actualTypeArguments[1]
-            val tClass = tp as Class<V>
-            viewModel = createViewModel(tClass)
-        }
+        val tp = (type as ParameterizedType).actualTypeArguments[1]
+        val tClass = tp as Class<V>
+        createViewModel(tClass)
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        layoutBinding.lifecycleOwner = this
         //为ViewModel注入生命周期感知
         lifecycle.addObserver(viewModel)
         viewModel.injectLifecycleProvider(this)
+
+        onCreated(savedInstanceState)
+    }
+
+    override fun onDestroy() {
+        layoutBinding.unbind()
+        super.onDestroy()
     }
 }
