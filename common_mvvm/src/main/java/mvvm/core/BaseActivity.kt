@@ -15,7 +15,7 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : CommonActivity() {
 
     protected val layoutBinding: T by lazy {
-        DataBindingUtil.setContentView(this, bindLayoutId()) as T
+        DataBindingUtil.inflate<T>(layoutInflater , bindLayoutId() , null , false)
     }
 
     @Suppress("UNCHECKED_CAST")
