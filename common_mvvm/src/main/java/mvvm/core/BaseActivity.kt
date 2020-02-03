@@ -14,7 +14,7 @@ import java.lang.reflect.ParameterizedType
  */
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : CommonActivity() {
 
-    val layoutBinding: T by lazy {
+    open val layoutBinding: T by lazy {
         DataBindingUtil.inflate<T>(layoutInflater, bindLayoutId(), null, false)
     }
 
