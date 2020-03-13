@@ -27,7 +27,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //kotlin
     implementation config.kotlin.kotlin
@@ -36,7 +36,7 @@ dependencies {
     //coroutines
     implementation config.kotlin.coroutines_core
     implementation config.kotlin.coroutines_android
-//    implementation config.kotlin.reflect
+    implementation config.kotlin.reflect
 
     //android 控件需要开放
     kapt config.androidx.databinding
@@ -52,8 +52,10 @@ dependencies {
 //    implementation config.jetpack.nav_ui
 
     //retrofit
-//    api config.net.okhttp
-    api config.net.retrofit
+    api config.net.okhttp
+    api(config.net.retrofit) {
+        transitive = false
+    }
     api config.net.gson_converter
 
     //Glide
