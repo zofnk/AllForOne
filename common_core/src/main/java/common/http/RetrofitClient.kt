@@ -3,7 +3,6 @@ package common.http
 import common.core.CommonConfig
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import java.util.logging.Level
@@ -22,7 +21,6 @@ object RetrofitClient {
         Retrofit.Builder()
             .client(okHttpManager.build())
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
     }
 
      val okHttpManager by lazy {

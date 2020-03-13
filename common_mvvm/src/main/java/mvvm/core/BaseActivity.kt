@@ -31,7 +31,6 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : CommonActi
         layoutBinding.lifecycleOwner = this
         //为ViewModel注入生命周期感知
         lifecycle.addObserver(viewModel)
-        viewModel.injectLifecycleProvider(this)
 
         onCreated(savedInstanceState)
     }

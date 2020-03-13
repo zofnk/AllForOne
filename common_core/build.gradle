@@ -27,7 +27,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
     //kotlin
     implementation config.kotlin.kotlin
@@ -36,7 +36,7 @@ dependencies {
     //coroutines
     implementation config.kotlin.coroutines_core
     implementation config.kotlin.coroutines_android
-    implementation config.kotlin.reflect
+//    implementation config.kotlin.reflect
 
     //android 控件需要开放
     kapt config.androidx.databinding
@@ -48,14 +48,12 @@ dependencies {
     //JetPack
     implementation config.jetpack.extensions
     implementation config.jetpack.viewmodel
-    implementation config.jetpack.nav
-    implementation config.jetpack.nav_ui
+//    implementation config.jetpack.nav
+//    implementation config.jetpack.nav_ui
 
     //retrofit
-    api config.net.okhttp
-    api(config.net.retrofit) {
-        transitive = false
-    }
+//    api config.net.okhttp
+    api config.net.retrofit
     api config.net.gson_converter
 
     //Glide
@@ -66,19 +64,12 @@ dependencies {
 
     //BRVAH
     api config.recyclerview.brvah
-
-    api config.utils.rxjava
-    api config.utils.rxAndroid
-    api config.net.adapter
     api config.net.log
-
-    api config.utils.rxlifecycle
-    api config.utils.rxlifecycle_components
 
     implementation(config.glide.glide_integration) {
         transitive = false
     }
     kapt config.glide.glide_integration
 
-    api config.utils.aop
+//    api config.utils.aop
 }

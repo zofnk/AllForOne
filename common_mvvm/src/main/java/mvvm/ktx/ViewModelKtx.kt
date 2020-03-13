@@ -3,30 +3,22 @@ package mvvm.ktx
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import common.http.ApiException
-import common.http.ExceptionHandle
 import common.http.function.CoroutineResponseHandler
 import common.ktx.errorHandler
-import common.ktx.exceptionTransformer
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import mvvm.core.BaseViewModel
-import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Author : zofnk.
  * Email : zofnk@vip.qq.com.
  * Create Time :  2019-11-22. 16:23
  */
-/**
- * 注入生命周期感知能力
- */
-fun <T> BaseViewModel.injectLifecycle() = lifecycleProvider?.bindToLifecycle<T>()
-
 //在ViewModel中启动协程域
-fun ViewModel.launchUI(func: suspend CoroutineScope.() -> Unit) {
+fun ViewModel.launchUI(
+    context: CoroutineContext = Dispatchers.Main,
+    func: suspend CoroutineScope.() -> Unit
+) {
     viewModelScope.launch { func() }
 }
 
@@ -41,11 +33,12 @@ fun <T> AndroidViewModel.createRequest(func: CoroutineResponseHandler<T>.() -> U
         .apply {
             func()
         }
-
     launchUI {
         responseHandler.onStart?.invoke()
         try {
-            val response = responseHandler.onRequest?.invoke()
+            val response = withContext(Dispatchers.IO) {
+                responseHandler.onRequest?.invoke()
+            }
             responseHandler.onSuccess?.invoke(response!!)
         } catch (e: Exception) {
             e.printStackTrace()

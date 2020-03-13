@@ -47,10 +47,10 @@ fun RecyclerView.horizontal(spanCount: Int = 0, isStaggered: Boolean = false): R
 val RecyclerView.data: List<Any?>
     get() = (adapter as BaseQuickAdapter<*, *>).data
 
-fun <T> RecyclerView.itemClick(listener: (data: List<T>, view: View, position: Int) -> Unit): RecyclerView {
+fun RecyclerView.itemClick(listener: (data: List<*>, view: View, position: Int) -> Unit): RecyclerView {
     adapter?.apply {
         (adapter as BaseQuickAdapter<*, *>).setOnItemClickListener { _, view, position ->
-            listener(data as List<T>, view, position)
+            listener(data as List<*>, view, position)
         }
     }
     return this

@@ -61,7 +61,6 @@
             android:text="@{vm.countDownStrRx}"
             android:textColor="@android:color/white"
             android:textSize="16sp"
-            app:view_click="@{() -> vm.onCountDownClickWithRxJava()}"
             tools:text="60秒" />
     </LinearLayout>
 </layout>
