@@ -1,3 +1,5 @@
+import com.zofnk.plugins.*
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -6,14 +8,12 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.zofnk'
 group = 'com.gitee.zofnk'
 
-def config = rootProject.ext
-
 android {
-    compileSdkVersion config.compileSdk
+    compileSdkVersion BuildConfig.CompileSdkVersion
 
     defaultConfig {
-        minSdkVersion config.minSdk
-        targetSdkVersion config.targetSdk
+        minSdkVersion BuildConfig.MinSdkVersion
+        targetSdkVersion BuildConfig.TargetSdkVersion
     }
     dataBinding {
         enabled = true
@@ -24,7 +24,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':common_core')
 
-    api config.jetpack.extensions
-    api config.jetpack.viewmodel
-    api config.jetpack.livedata
+    implementation JetPack.Lifecycle.Extensions
+    implementation JetPack.Lifecycle.ViewModel
+    implementation JetPack.Lifecycle.LiveData
 }

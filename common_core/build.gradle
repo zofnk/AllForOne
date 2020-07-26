@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'android-aspectjx'
+import com.zofnk.plugins.*
 
 group = 'com.github.zofnk'
 group = 'com.gitee.zofnk'
@@ -11,11 +11,11 @@ group = 'com.gitee.zofnk'
 def config = rootProject.ext
 
 android {
-    compileSdkVersion config.compileSdk
+    compileSdkVersion BuildConfig.CompileSdkVersion
 
     defaultConfig {
-        minSdkVersion config.minSdk
-        targetSdkVersion config.targetSdk
+        minSdkVersion BuildConfig.MinSdkVersion
+        targetSdkVersion BuildConfig.TargetSdkVersion
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -30,48 +30,49 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //kotlin
-    implementation config.kotlin.kotlin
-    implementation config.kotlin.coreKtx
+    implementation Kotlin.Jdk
+    implementation Kotlin.Core
 
-    //coroutines
-    implementation config.kotlin.coroutines_core
-    implementation config.kotlin.coroutines_android
-    implementation config.kotlin.reflect
-
-    //android 控件需要开放
-    kapt config.androidx.databinding
-    api config.androidx.material
-    api config.androidx.appcompat
-    api config.androidx.constraintlayout
-    api config.androidx.recyclerview
+    //Coroutines
+    implementation Kotlin.Coroutines.Core
+    implementation Kotlin.Coroutines.Android
 
     //JetPack
-    implementation config.jetpack.extensions
-    implementation config.jetpack.viewmodel
-//    implementation config.jetpack.nav
-//    implementation config.jetpack.nav_ui
+    implementation JetPack.Paging
+    implementation JetPack.Lifecycle.Extensions
+    implementation JetPack.Lifecycle.ViewModel
+    implementation JetPack.Lifecycle.LiveData
 
-    //retrofit
-    api config.net.okhttp
-    api(config.net.retrofit) {
-        transitive = false
-    }
-    api config.net.gson_converter
+    //AppCompat
+    api Appcompat.Appcompat
+    api Appcompat.RecyclerView
+    api Appcompat.ConstraintLayout
+    api Appcompat.Material
+
+    //Http
+    implementation Http.OkHttp
+    implementation Http.Retrofit
+    implementation Http.GsonConverter
+    implementation Http.LogInterceptor
 
     //Glide
-    api config.glide.glide
-    kapt config.glide.glide_compiler
+    implementation Glide.Glide
+    kapt Glide.Compiler
+    implementation Glide.Integration
+    kapt Glide.Integration
 
-    implementation config.utils.log
+    //Tool
+    implementation Tool.KLog
 
-    //BRVAH
-    api config.recyclerview.brvah
-    api config.net.log
+    //Koin
+    implementation Tool.Koin.Core
+    implementation Tool.Koin.CoreExt
+    implementation Tool.Koin.Scope
+    implementation Tool.Koin.ViewModel
+    implementation Tool.Koin.Fragment
+    implementation Tool.Koin.Ext
+    implementation Tool.Koin.Koter
 
-    implementation(config.glide.glide_integration) {
-        transitive = false
-    }
-    kapt config.glide.glide_integration
-
-//    api config.utils.aop
+    //Paging
+    implementation Tool.Brvah
 }

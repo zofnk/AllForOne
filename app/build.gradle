@@ -1,18 +1,18 @@
+import com.zofnk.plugins.*
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
-def config = rootProject.ext
-
 android {
-    compileSdkVersion config.compileSdk
-    buildToolsVersion config.buildTools
+    compileSdkVersion BuildConfig.CompileSdkVersion
+    buildToolsVersion BuildConfig.BuildToolsVersion
     defaultConfig {
-        minSdkVersion config.minSdk
-        targetSdkVersion config.targetSdk
-        versionCode config.versionCode
-        versionName config.versionName
+        minSdkVersion BuildConfig.MinSdkVersion
+        targetSdkVersion BuildConfig.TargetSdkVersion
+        versionCode BuildConfig.VersionCode
+        versionName BuildConfig.VersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -21,8 +21,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -34,8 +37,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':common_core')
     implementation project(path: ':common_mvvm')
-    implementation project(path: ':common_download')
 
-    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation Kotlin.Core
     implementation 'com.lxj:xpopup:1.8.10-x'
 }
