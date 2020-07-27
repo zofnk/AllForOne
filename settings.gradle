@@ -1,2 +1,2 @@
-include ':app', ':common_core', ':common_mvvm'
+include ':app', ':core'
 rootProject.name = 'AllForOne'

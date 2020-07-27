@@ -13,28 +13,27 @@ internal object Versions {
     const val Aop = "2.0.4"
 
     const val Kotlin = "1.3.72"
-    const val KotlinCore = "1.3.0"
-    const val Coroutines = "1.2.1"
+    const val KotlinCore = "1.3.1"
+    const val Coroutines = "1.3.8"
 
-    const val Appcompat = "1.0.0"
-    const val RecyclerView = "1.0.0"
-    const val ConstraintLayout = "1.1.3"
-    const val Material = "1.0.0"
+    const val Appcompat = "1.1.0"
+    const val RecyclerView = "1.2.0-alpha05"
+    const val ConstraintLayout = "2.0.0-beta8"
+    const val Material = "1.1.0"
 
-    const val Paging = "3.0.0-alpha02"
+    const val Paging = "3.0.0-alpha03"
     const val DataBinding = "4.0.1"
-    const val Lifecycle = "2.1.0"
+    const val Lifecycle = "2.2.0"
 
     const val KLog = "1.6.0"
     const val OkDownload = "1.0.6"
 
-    const val OkHttp = "4.2.2"
-    const val Retrofit = "2.7.0"
-    const val GsonConverter = "2.6.0"
-    const val LogInterceptor = "3.11.0"
+    const val OkHttp = "4.8.0"
+    const val Retrofit = "2.9.0"
 
     const val Koin = "2.1.6"
-    const val Glide = "4.10.0"
+    const val Glide = "4.11.0"
+    const val Anko = "0.10.8"
 
     const val Bravh = "3.0.4"
 }
@@ -73,6 +72,9 @@ object JetPack {
         const val Extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.Lifecycle}"
         const val ViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Lifecycle}"
         const val LiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.Lifecycle}"
+        const val RunTime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.Lifecycle}"
+        const val Common = "androidx.lifecycle:lifecycle-common-java8:${Versions.Lifecycle}"
+        const val LiveDataCore = "androidx.lifecycle:lifecycle-livedata-core:${Versions.Lifecycle}"
     }
 }
 
@@ -89,26 +91,37 @@ object Tool {
     object Koin {
         // Koin for Kotlin
         const val Core = "org.koin:koin-core:${Versions.Koin}"
+
         // Koin extended & experimental features
         const val CoreExt = "org.koin:koin-core-ext:${Versions.Koin}"
+
         // Koin AndroidX Scope features
         const val Scope = "org.koin:koin-androidx-scope:${Versions.Koin}"
+
         // Koin AndroidX ViewModel features
         const val ViewModel = "org.koin:koin-androidx-viewmodel:${Versions.Koin}"
+
         // Koin AndroidX Fragment features
         const val Fragment = "org.koin:koin-androidx-fragment:${Versions.Koin}"
+
         // Koin AndroidX Experimental features
         const val Ext = "org.koin:koin-androidx-ext:${Versions.Koin}"
+
         // Koin for Ktor Kotlin
         const val Koter = "org.koin:koin-ktor:${Versions.Koin}"
+    }
+
+    object Anko {
+        const val Commons = "org.jetbrains.anko:anko-commons:${Versions.Anko}"
+        const val Coroutines = "org.jetbrains.anko:anko-coroutines:${Versions.Anko}"
     }
 }
 
 object Http {
     const val OkHttp = "com.squareup.okhttp3:okhttp:${Versions.OkHttp}"
+    const val LogInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.OkHttp}"
     const val Retrofit = "com.squareup.retrofit2:retrofit:${Versions.Retrofit}"
-    const val GsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.GsonConverter}"
-    const val LogInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.LogInterceptor}"
+    const val GsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.Retrofit}"
 }
 
 object Glide {

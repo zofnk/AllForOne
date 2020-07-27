@@ -1,0 +1,37 @@
+apply plugin: "com.github.ben-manes.versions"
+
+def isNonStable = { String version ->
+
+//    def stableKeyword = ['RELEASE', 'FINAL', 'GA', 'BETA']
+//    def stableKeyword = ['RELEASE', 'FINAL', 'GA', 'ALPHA', 'BETA']
+    def stableKeyword = ['RELEASE', 'FINAL', 'GA']
+            .any { version.toUpperCase().contains(it) }
+    def regex = /^[0-9,.v-]+(-r)?$/
+    return !stableKeyword && !(version ==~ regex)
+}
+
+tasks.named("dependencyUpdates").configure {
+    checkForGradleUpdate = true
+    //plain json xml
+    outputFormatter = "plain"
+    outputDir = "./buildSrc/report"
+    reportfileName = "dependency"
+
+    rejectVersionIf {
+        isNonStable(candidate.version)
+    }
+
+    rejectVersionIf {
+        isNonStable(candidate.version) && !isNonStable(currentVersion)
+    }
+
+    resolutionStrategy {
+        componentSelection {
+            all {
+                if (isNonStable(candidate.version) && !isNonStable(currentVersion)) {
+                    reject('Release candidate')
+                }
+            }
+        }
+    }
+}

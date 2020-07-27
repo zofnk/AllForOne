@@ -1,41 +1,31 @@
-import com.zofnk.plugins.*
-
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.github.dcendents.android-maven'
+import com.zofnk.plugins.*
+
+group = 'com.github.zofnk'
+group = 'com.gitee.zofnk'
 
 android {
     compileSdkVersion BuildConfig.CompileSdkVersion
-    buildToolsVersion BuildConfig.BuildToolsVersion
+
     defaultConfig {
         minSdkVersion BuildConfig.MinSdkVersion
         targetSdkVersion BuildConfig.TargetSdkVersion
-        versionCode BuildConfig.VersionCode
-        versionName BuildConfig.VersionName
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    buildFeatures {
-        dataBinding = true
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':core')
 
     //kotlin
     implementation Kotlin.Jdk
@@ -89,6 +79,4 @@ dependencies {
 
     //Paging
     implementation Tool.Brvah
-
-    implementation 'com.lxj:xpopup:2.0.8'
 }
