@@ -18,7 +18,7 @@ object RecyclerViewAdapter {
     fun <T> RecyclerView.bindItems(data: List<T>) {
         adapter?.let {
             val quickAdapter = it as BaseQuickAdapter<T, *>
-            quickAdapter.setNewData(data)
+//            quickAdapter.setNewData(data)
         }
     }
 }

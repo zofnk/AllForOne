@@ -22,7 +22,7 @@ object ViewAdapter {
 
     @JvmStatic
     @BindingAdapter(VIEW_LONG_CLICK)
-    fun View.viewOnLongClick(listener: View.OnClickListener) {
-        longClick { listener.onClick(this) }
+    fun View.viewOnLongClick(listener: View.OnLongClickListener) {
+        listener.onLongClick(this)
     }
 }

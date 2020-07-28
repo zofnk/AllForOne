@@ -1,9 +1,7 @@
 package common.ext
 
-import common.data.NetIResponse
 import common.http.ApiException
 import common.http.ExceptionHandle
-import common.http.ResponseException
 
 /**
  * Author : zofnk.
@@ -24,8 +22,3 @@ fun Throwable.errorHandler(): ApiException =
     ExceptionHandle
         .handleException(this)
         .exceptionTransformer()
-
-fun <T> NetIResponse<T>.responseTransformer(): T {
-    if (!isSuccess()) throw ResponseException(toJson())
-    return response()
-}

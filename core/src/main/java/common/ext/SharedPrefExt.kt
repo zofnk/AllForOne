@@ -3,7 +3,6 @@ package common.ext
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.collection.ArraySet
-import androidx.fragment.app.Fragment
 
 /**
  * Author : zofnk.
@@ -11,10 +10,6 @@ import androidx.fragment.app.Fragment
  * Creat Time :  2019-11-22. 16:00
  */
 fun Context.sp(name: String): SharedPreferences = getSharedPreferences(name, Context.MODE_PRIVATE)
-
-fun Fragment.sp(name: String) {
-    ctx.sp(name)
-}
 
 inline fun <reified T> SharedPreferences.getObj(key: String): T? {
     val value = getString(key, null)

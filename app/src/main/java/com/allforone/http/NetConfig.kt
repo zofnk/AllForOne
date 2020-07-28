@@ -12,8 +12,3 @@ import common.core.repo.BaseRepository
 //项目api url 添加进createApi的baseUrl的默认值内
 const val BASE_URL = "http://all.api.acgneta.com"
 const val BASE_URL_JUHE = "https://v.juhe.cn/"
-
-//项目必须加一下这个来配置retrofit
-//todo 可拓展header/拦截器/缓存/等等....
-fun <T> BaseRepository.createApi(clazz: Class<T>, baseUrl: String = BASE_URL): T =
-    config(baseUrl, clazz)

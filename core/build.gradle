@@ -58,8 +58,8 @@ dependencies {
 
     //Glide
     implementation Glide.Glide
-    kapt Glide.Compiler
-    implementation Glide.Integration
+//    kapt Glide.Compiler
+//    implementation Glide.Integration
 
     //Tool
     implementation Tool.KLog

@@ -17,6 +17,7 @@ class TestActivity : BaseActivity() {
     private val viewModel: TestViewModel by viewModel()
 
     override fun init(savedInstanceState: Bundle?) {
+        binding
     }
 
 }

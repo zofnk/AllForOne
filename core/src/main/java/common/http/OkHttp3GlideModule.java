@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.Registry;
-import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
 import com.bumptech.glide.load.engine.cache.ExternalPreferredCacheDiskCacheFactory;
 import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import com.bumptech.glide.load.model.GlideUrl;
@@ -35,8 +34,6 @@ public class OkHttp3GlideModule extends AppGlideModule {
 
     @Override
     public void registerComponents(@NotNull Context context, Glide glide, @NotNull Registry registry) {
-        OkHttpUrlLoader.Factory factory = new OkHttpUrlLoader.Factory(manager.build());
-        glide.getRegistry().replace(GlideUrl.class, InputStream.class, factory);
     }
 
     @Override
