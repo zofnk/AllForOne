@@ -12,5 +12,6 @@ class TestViewModel(
     private val repository: TestRepository
 ) : ViewModel() {
 
+    fun loadBanner() = repository.requireBanner()
 
 }

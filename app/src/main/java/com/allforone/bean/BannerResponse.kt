@@ -5,7 +5,7 @@ package com.allforone.bean
  * Email : zofnk@vip.qq.com.
  * Creat Time :  2019-11-22. 09:58
  */
-data class BannerBean(
+data class BannerResponse(
     val Id: Int,
     val Title: String,
     val Content: String,
@@ -20,4 +20,11 @@ data class BannerBean(
     val InsertTime: String,
     val Type: Int,
     val TypeId: Int
+)
+
+data class ListResponse<T>(
+    val TotalCount: Int,
+    val TotalPage: Int,
+    val StateCode: Int,
+    val List: List<T>
 )

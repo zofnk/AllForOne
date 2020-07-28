@@ -1,6 +1,7 @@
 package com.allforone.ui.test
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.allforone.R
 import com.allforone.databinding.ActivityTestBinding
 import common.core.common.BaseActivity
@@ -17,7 +18,14 @@ class TestActivity : BaseActivity() {
     private val viewModel: TestViewModel by viewModel()
 
     override fun init(savedInstanceState: Bundle?) {
-        binding
+
+        viewModel.loadBanner().observe(this, Observer {
+            binding.tvRequest.text = it.Data.List.toString()
+        })
+
+        binding.tvRequest.setOnClickListener {
+            viewModel.loadBanner()
+        }
     }
 
 }
